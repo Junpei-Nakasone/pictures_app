@@ -38,7 +38,7 @@
                 class="mr-4 mt-4"
                 @click="login()"
               >
-                Guest Login
+                デモユーザーでログイン(確認用)
               </v-btn>
               <div class="pa-4 text-center">
                 登録していない方
