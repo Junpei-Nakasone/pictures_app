@@ -2,7 +2,7 @@ package handler
 
 import (
 	"net/http"
-	"nuxt-dadjokes/api/api002/service"
+	"pictures_app/api/api002/service"
 
 	"github.com/labstack/echo"
 )

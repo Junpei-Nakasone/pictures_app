@@ -2,8 +2,8 @@ package web
 
 import (
 	"net/http"
-	"nuxt-dadjokes/api/api007/domain"
-	"nuxt-dadjokes/api/api007/service"
+	"pictures_app/api/api007/domain"
+	"pictures_app/api/api007/service"
 
 	"github.com/labstack/echo"
 )
