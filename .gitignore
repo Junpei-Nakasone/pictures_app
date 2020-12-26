@@ -1,0 +1,6 @@
+.aws/
+memo.txt
+TODO
+.env
+client/dist
+.DS_Store

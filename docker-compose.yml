@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  # go:
+  #   build:
+  #     context: ./server
+  #     dockerfile: Dockerfile
+  #   tty: true
+  #   # volumes:
+  #   #   - .:/app
+  #   ports:
+  #     - 9999:9999
+  #   depends_on:
+  #     - "mysql"
+  # MySQL
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_database
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: password
+      TZ: 'Asia/Tokyo'
+    volumes:
+      # - ./docker/db/data:/var/lib/mysql
+      - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/db/sql:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
+    container_name: mysql_host
+  phpmyadmin:
+    container_name: test_phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOSTS=mysql_host
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+    ports:
+      - 8888:80
