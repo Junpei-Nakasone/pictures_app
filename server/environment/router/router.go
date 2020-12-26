@@ -9,6 +9,7 @@ import (
 	api004 "nuxt-dadjokes/api/api004/handler"
 	api005 "nuxt-dadjokes/api/api005/handler"
 	api006 "nuxt-dadjokes/api/api006/handler"
+	api007 "nuxt-dadjokes/api/api007/infra/web"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -28,6 +29,7 @@ func NewRouter() *echo.Echo {
 	e.PUT("updateJoke", api004.UpdateJoke)
 	e.DELETE("deleteJoke", api005.DeleteJoke)
 	e.POST("addImage", api006.AddImage)
+	e.POST("login", api007.Login)
 
 	e.Use(middleware.CORS())
 
