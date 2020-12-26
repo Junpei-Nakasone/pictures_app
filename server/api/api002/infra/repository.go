@@ -1,8 +1,8 @@
 package infra
 
 import (
-	"nuxt-dadjokes/api/api002/domain"
-	"nuxt-dadjokes/environment/db"
+	"pictures_app/api/api002/domain"
+	"pictures_app/environment/db"
 )
 
 // FetchImages 画像を投稿順に取得する

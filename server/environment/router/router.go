@@ -3,13 +3,13 @@ package router
 import (
 	"net/http"
 
-	api001 "nuxt-dadjokes/api/api001/handler"
-	api002 "nuxt-dadjokes/api/api002/handler"
-	api003 "nuxt-dadjokes/api/api003/handler"
-	api004 "nuxt-dadjokes/api/api004/handler"
-	api005 "nuxt-dadjokes/api/api005/handler"
-	api006 "nuxt-dadjokes/api/api006/handler"
-	api007 "nuxt-dadjokes/api/api007/infra/web"
+	api001 "pictures_app/api/api001/handler"
+	api002 "pictures_app/api/api002/handler"
+	api003 "pictures_app/api/api003/handler"
+	api004 "pictures_app/api/api004/handler"
+	api005 "pictures_app/api/api005/handler"
+	api006 "pictures_app/api/api006/handler"
+	api007 "pictures_app/api/api007/infra/web"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"

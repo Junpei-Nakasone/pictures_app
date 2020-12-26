@@ -1,6 +1,6 @@
 package main
 
-import "nuxt-dadjokes/environment/router"
+import "pictures_app/environment/router"
 
 func main() {
 	e := router.NewRouter()

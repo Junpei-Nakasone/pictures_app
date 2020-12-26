@@ -1,8 +1,8 @@
 package data
 
 import (
-	"nuxt-dadjokes/api/api007/domain"
-	"nuxt-dadjokes/environment/db"
+	"pictures_app/api/api007/domain"
+	"pictures_app/environment/db"
 )
 
 // FetchUserData ログインするユーザー情報を取得

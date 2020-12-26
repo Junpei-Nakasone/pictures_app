@@ -2,8 +2,8 @@ package handler
 
 import (
 	"net/http"
-	"nuxt-dadjokes/api/api005/domain"
-	"nuxt-dadjokes/environment/db"
+	"pictures_app/api/api005/domain"
+	"pictures_app/environment/db"
 
 	"github.com/labstack/echo"
 )
