@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
+import axios from 'axios'
+import api from '@/services/api'
 
 Vue.use(Vuex)
 
@@ -21,10 +23,14 @@ const authModule = {
   mutations: {
     set(state, payload) {
       alert('set run')
-      console.log(payload)
-      state.username = payload.user.username
+      alert('set check')
+      // console.log(payload)
+      console.log("in sert",payload)
+      state.username = payload.user_name
       state.isLoggedIn = true
-      state.id = payload.user.id
+      state.id = payload.user_id
+      console.log("ログインデータ", state)
+      alert('set終了')
     },
     clear(state) {
       state.username = ''
@@ -35,16 +41,27 @@ const authModule = {
   actions: {
     login(context, payload) {
       alert('login on store running')
-      console.log(payload)
+      console.log("logindata ",payload)
       // TODO: send to login API
 
-      return context.dispatch('reload')
+      return api.post('/login', {
+        'user_name': payload.username,
+        'password': payload.password,
+      })
+      .then((res) => {
+        console.log("then in loginmethod",res.data)
+        return context.commit('set',res.data)
+        // context.dispatch('reload')
+        // .then(user => user)
+      })
+      .catch(error => error.response)
     },
     reload(context) {
       alert('reload run')
+      console.log('reloadデータ', context.user_name)
       const userdata = {
-        username: "testuser",
-        password: "testpassword"
+        username: context.username,
+        password: context.password,
       }
       return context.commit('set', {
         user: userdata
@@ -57,11 +74,53 @@ const authModule = {
   }
 }
 
+const messageModule = {
+  namespaced: true,
+  state: {
+    success: '',
+    info: '',
+    warnings: '',
+    error: '',
+  },
+  getters: {
+    success: state => state.success,
+    info: state => state.warnings,
+    error: state => state.error,
+  },
+  mutations: {
+    set(state, payload) {
+      if (payload.error) {
+        alert("setError", payload)
+        console.log("setError", payload)
+        state.error = payload.error
+      }
+    },
+    clear(state) {
+      state.error = ''
+    }
+  },
+  actions: {
+    setErrorMessage(context, payload) {
+      console.log("setErrorM",payload)
+      context.commit('set', {
+        'error': payload.message
+      })
+      setTimeout(() => {
+        context.dispatch('clearMessage')
+      }, 1500)
+    },
+    // メッセージ削除
+    clearMessage(context) {
+      context.commit('clear')
+    }
+  }
+}
 
 
 const store = new Vuex.Store({
   modules: {
-    auth: authModule
+    auth: authModule,
+    message: messageModule,
   },
   plugins: [createPersistedState({
     key: 'vuexdata',

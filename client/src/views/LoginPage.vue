@@ -52,6 +52,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
@@ -62,24 +64,34 @@ export default {
       show1: false,
     };
   },
+  computed: {
+    ...mapGetters("auth", {
+      username: "username",
+      isLoggedIn: "isLoggedIn",
+      id: "id",
+    })
+  },
   methods: {
-    login(username="GuestUser", password="test") {
-      alert('login run')
-      this.form.username = username;
-      this.form.password = password;
-      console.log(this.form.username)
-
+    login() {
       this.$store.dispatch("auth/login", {
-        username: username,
-        password: password,
+        username: this.form.username,
+        password: this.form.password,
       })
-      this.$router.replace("/")
-      // .then(() => {
-      //   alert('login success')
-      // })
-      // .catch(() => {
-      //   alert('err')
-      // })
+      .then(() => {
+        if (this.isLoggedIn) {
+          alert('ログイン成功')
+          this.$router.push("/")
+        }
+        if (!this.isLoggedIn) {
+          alert('ログイン失敗')
+          this.$store.dispatch("message/setErrorMessage", {
+          message: " ユーザー名かパスワード名が間違っています"
+        })
+        }
+      })
+      .catch((err) => {
+
+      })
     }
   }
 }
