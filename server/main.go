@@ -1,6 +1,8 @@
 package main
 
-import "pictures_app/environment/router"
+import (
+	"pictures_app/environment/router"
+)
 
 func main() {
 	e := router.NewRouter()

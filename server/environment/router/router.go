@@ -10,6 +10,7 @@ import (
 	api005 "pictures_app/api/api005/handler"
 	api006 "pictures_app/api/api006/handler"
 	api007 "pictures_app/api/api007/infra/web"
+	api008 "pictures_app/api/api008/infra/web"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -30,6 +31,7 @@ func NewRouter() *echo.Echo {
 	e.DELETE("deleteJoke", api005.DeleteJoke)
 	e.POST("addImage", api006.AddImage)
 	e.POST("login", api007.Login)
+	e.POST("addNewUser", api008.AddNewUser)
 
 	e.Use(middleware.CORS())
 

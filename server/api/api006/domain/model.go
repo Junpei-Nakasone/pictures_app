@@ -2,7 +2,7 @@ package domain
 
 import "time"
 
-// RequestParam suppouse to contain new joke
+// RequestParam リクエストパラメータs
 type RequestParam struct {
 	UserID   int    `json:"user_id"`
 	ImageURL string `json:"image_url"`
