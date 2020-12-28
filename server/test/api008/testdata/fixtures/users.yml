@@ -1,0 +1,6 @@
+- user_id: 1
+  user_name: user1
+  user_password: password1
+  email_address: yml@emai.com
+  note: thisdata is from yml.file
+  icon_image: null
