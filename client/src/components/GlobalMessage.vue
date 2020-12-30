@@ -2,6 +2,18 @@
   <div>
     <v-alert
       dense
+      type="success"
+      class="message"
+      border="left"
+      elevation="10"
+      dark
+      show
+      v-if="message.success"
+    >
+      {{message.success}}
+    </v-alert>
+    <v-alert
+      dense
       type="error"
       class="message"
       border="left"

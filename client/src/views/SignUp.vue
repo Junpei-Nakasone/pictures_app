@@ -47,7 +47,7 @@
 
                   >
                     <v-text-field
-                      v-model="password1"
+                      v-model="password"
                       :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                       :type="show1 ? 'text' : 'password'"
                       counter
@@ -64,7 +64,7 @@
                     rules="required|confirmed:password1"
                   >
                     <v-text-field
-                      v-model="password2"
+                      v-model="password_confirm"
                       :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
                       :type="show2 ? 'text' : 'password'"
                       counter
@@ -74,6 +74,19 @@
                       @click:append="show2 = !show2"
                       prepend-inner-icon="mdi-lock"
                     ></v-text-field>
+                  </ValidationProvider>
+                  <ValidationProvider
+                    mode="lazy"
+                    name="備考"
+                    rules="required|note"
+                  >
+                    <v-textarea
+                      v-model="note"
+                      :error-messages="errors"
+                      required
+                      placeholder="自己紹介"
+                      prepend-inner-icon="mdi-person"
+                    ></v-textarea>
                   </ValidationProvider>
                   <v-btn
                     block
@@ -95,6 +108,10 @@
 </template>
 
 <script>
+import axios from 'axios'
+import api from '@/services/api'
+import { mapGetters } from "vuex"
+
 import {
   ValidationProvider,
   ValidationObserver,
@@ -110,17 +127,50 @@ export default {
       message: "",
       username: "",
       email_address: "",
-      password1: "",
-      password2: "",
+      password: "",
+      password_confirm: "",
+      note: "",
       isLoading: false,
       show1: false,
       show2: false,
     };
   },
+  computed: {
+    ...mapGetters("auth", {
+      isLoggedIn: "isLoggedIn",
+      id: "id",
+    })
+  },
   methods: {
     submitUser() {
-      alert(this.password1)
-      console.log(this.username, this.email_address, this.password1, this.password2)
+      api.post('/addNewUser', {
+        "user_name": this.username,
+        "password": this.password,
+	      "email_address": this.email_address,
+        "note": this.note,
+      })
+      .then((response) => {
+        console.log('結果', response.data)
+        this.loginAfterSignup();
+      })
+      .catch((error) => {
+        console.log("エラー", error)
+      })
+    },
+    loginAfterSignup() {
+      this.$store.dispatch("auth/login", {
+        username: this.username,
+        password: this.password
+      })
+      .then(() => {
+        if (this.isLoggedIn) {
+          alert('新規登録成功')
+          this.$store.dispatch("message/setSuccessMessage", {
+            message: "新規登録成功"
+          })
+          this.$router.push("/")
+        }
+      })
     }
   }
 }

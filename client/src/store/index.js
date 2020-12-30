@@ -42,7 +42,7 @@ const authModule = {
     login(context, payload) {
       alert('login on store running')
       console.log("logindata ",payload)
-      // TODO: send to login API
+      // TODO: send tdo login API
 
       return api.post('/login', {
         'user_name': payload.username,
@@ -54,7 +54,8 @@ const authModule = {
         // context.dispatch('reload')
         // .then(user => user)
       })
-      .catch(error => error.response)
+      .catch(error => error.response,
+        alert('ログイン失敗'))
     },
     reload(context) {
       alert('reload run')
@@ -89,6 +90,9 @@ const messageModule = {
   },
   mutations: {
     set(state, payload) {
+      if (payload.success) {
+        state.success = payload.success
+      }
       if (payload.error) {
         alert("setError", payload)
         console.log("setError", payload)
@@ -96,10 +100,19 @@ const messageModule = {
       }
     },
     clear(state) {
+      state.success = ''
       state.error = ''
     }
   },
   actions: {
+    setSuccessMessage(context, payload) {
+      context.commit('set', {
+        'success': payload.message
+      })
+      setTimeout(() => {
+        context.dispatch('clearMessages')
+      }, 1500)
+    },
     setErrorMessage(context, payload) {
       console.log("setErrorM",payload)
       context.commit('set', {

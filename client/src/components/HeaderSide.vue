@@ -1,6 +1,7 @@
 <template>
   <div v-if="isLoggedIn">
     <div class="d-none d-sm-flex">
+      <div>{{username}}</div>
       <router-link class="router-link" to="/newPost">
         <v-btn
           depressed
@@ -46,6 +47,9 @@ export default {
   computed: {
     isLoggedIn : function () {
       return this.$store.getters["auth/isLoggedIn"]
+    },
+    username : function () {
+      return this.$store.getters["auth/username"]
     }
   },
   methods: {
