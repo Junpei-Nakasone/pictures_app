@@ -1,10 +1,9 @@
-package router
+package waf
 
 import (
 	"net/http"
 
 	api001 "pictures_app/api/api001/handler"
-	api002 "pictures_app/api/api002/handler"
 	api003 "pictures_app/api/api003/handler"
 	api004 "pictures_app/api/api004/handler"
 	api005 "pictures_app/api/api005/handler"
@@ -17,15 +16,14 @@ import (
 )
 
 // NewRouter returns router
-func NewRouter() *echo.Echo {
-	e := echo.New()
+func NewRouter(e *echo.Echo, h Handler) {
 
 	e.GET("/ping", func(c echo.Context) error {
 		return c.String(http.StatusOK, "PONG")
 	})
 
 	e.GET("sample", api001.SampleAPI)
-	e.GET("fetchLatestImages", api002.FetchImages)
+	e.GET("fetchLatestImages", h.api002.FetchImages)
 	e.POST("addJoke", api003.AddJoke)
 	e.PUT("updateJoke", api004.UpdateJoke)
 	e.DELETE("deleteJoke", api005.DeleteJoke)
@@ -35,5 +33,5 @@ func NewRouter() *echo.Echo {
 
 	e.Use(middleware.CORS())
 
-	return e
+	// return e
 }
