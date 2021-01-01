@@ -1,0 +1,33 @@
+package waf
+
+import (
+	api001 "pictures_app/api/api001/infra/web"
+	api002 "pictures_app/api/api002/infra/web"
+	api006 "pictures_app/api/api006/infra/web"
+	api007 "pictures_app/api/api007/infra/web"
+	api008 "pictures_app/api/api008/infra/web"
+)
+
+type Handler struct {
+	api001 api001.Handler
+	api002 api002.Handler
+	api006 api006.Handler
+	api007 api007.Handler
+	api008 api008.Handler
+}
+
+func NewHandler(
+	api001 api001.Handler,
+	api002 api002.Handler,
+	api006 api006.Handler,
+	api007 api007.Handler,
+	api008 api008.Handler,
+) Handler {
+	return Handler{
+		api001: api001,
+		api002: api002,
+		api006: api006,
+		api007: api007,
+		api008: api008,
+	}
+}

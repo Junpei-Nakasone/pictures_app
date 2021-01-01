@@ -1,11 +1,15 @@
 package main
 
 import (
-	"pictures_app/environment/router"
+	"pictures_app/environment"
+	"pictures_app/environment/db"
 )
 
 func main() {
-	e := router.NewRouter()
+	db := db.CreateDBConnection()
+	defer db.Close()
 
-	e.Start(":9999")
+	app := environment.NewApp(db)
+
+	app.App.Start(":9999")
 }

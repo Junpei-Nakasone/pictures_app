@@ -2,13 +2,11 @@ package api008
 
 import (
 	"log"
-	"net/http"
 	"pictures_app/environment/db"
-	"pictures_app/environment/router"
-	"testing"
+
+	// "pictures_app/environment/router"
 
 	"github.com/go-testfixtures/testfixtures/v3"
-	"github.com/steinfletcher/apitest"
 )
 
 func prepareDB() {
@@ -27,17 +25,17 @@ func prepareDB() {
 	}
 }
 
-func TestApi008Test(t *testing.T) {
+// func TestApi008Test(t *testing.T) {
 
-	prepareDB()
+// 	prepareDB()
 
-	apitest.New().
-		Handler(router.NewRouter()).
-		Post("/addNewUser").
-		Header("Content-Type", "application/json").
-		BodyFromFile("testdata/test001.golden").
-		Expect(t).
-		Status(http.StatusOK).
-		End()
+// 	apitest.New().
+// 		Handler(router.NewRouter()).
+// 		Post("/addNewUser").
+// 		Header("Content-Type", "application/json").
+// 		BodyFromFile("testdata/test001.golden").
+// 		Expect(t).
+// 		Status(http.StatusOK).
+// 		End()
 
-}
+// }
