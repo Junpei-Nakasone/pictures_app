@@ -2,11 +2,16 @@ package api007
 
 import (
 	"log"
+	"net/http"
+	"pictures_app/environment"
 	"pictures_app/environment/db"
+	"pictures_app/test/util"
+	"testing"
 
 	// "pictures_app/environment/router"
 
 	"github.com/go-testfixtures/testfixtures/v3"
+	"github.com/steinfletcher/apitest"
 )
 
 func prepareDB() {
@@ -25,17 +30,20 @@ func prepareDB() {
 	}
 }
 
-// func TestApi007Test(t *testing.T) {
+func TestApi007Test(t *testing.T) {
 
-// 	prepareDB()
+	// prepareDB()
+	db := db.CreateDBConnection()
+	app := environment.NewApp(db)
 
-// 	apitest.New().
-// 		Handler(router.NewRouter()).
-// 		Post("/login").
-// 		Header("Content-Type", "application/json").
-// 		BodyFromFile("testdata/test001.golden").
-// 		Expect(t).
-// 		Status(http.StatusOK).
-// 		End()
+	util.MethodTest(t, "/login", app.App, "Post")
 
-// }
+	apitest.New().
+		Handler(app.App).
+		Post("/login").
+		Header("Content-Type", "application/json").
+		BodyFromFile("testdata/test001.golden").
+		Expect(t).
+		Status(http.StatusOK).
+		End()
+}
