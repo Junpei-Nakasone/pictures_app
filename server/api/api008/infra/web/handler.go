@@ -3,13 +3,26 @@ package web
 import (
 	"net/http"
 	"pictures_app/api/api008/domain"
-	"pictures_app/api/api008/service"
+
+	"pictures_app/api/api008/usecase"
 
 	"github.com/labstack/echo"
 )
 
+type handler struct {
+	s usecase.Service
+}
+
+type Handler interface {
+	AddNewUser(c echo.Context) error
+}
+
+func NewHandler(s usecase.Service) Handler {
+	return &handler{s: s}
+}
+
 // AddNewUser ユーザー新規登録API
-func AddNewUser(c echo.Context) error {
+func (h *handler) AddNewUser(c echo.Context) error {
 
 	param := domain.RequestParam{}
 
@@ -17,7 +30,7 @@ func AddNewUser(c echo.Context) error {
 		return err
 	}
 
-	res, err := service.AddNewUser(param)
+	res, err := h.s.AddNewUser(param)
 	if err != nil {
 		return err
 	}

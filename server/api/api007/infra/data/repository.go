@@ -2,18 +2,25 @@ package data
 
 import (
 	"pictures_app/api/api007/domain"
-	"pictures_app/environment/db"
+	"pictures_app/api/api007/usecase/repository"
+
+	"github.com/jinzhu/gorm"
 )
 
+type serviceRepository struct {
+	db *gorm.DB
+}
+
+func NewServiceRepository(db *gorm.DB) repository.ServiceRepository {
+	return &serviceRepository{db: db}
+}
+
 // FetchUserData ログインするユーザー情報を取得
-func FetchUserData(param domain.RequestParam) (domain.ResponseParam, error) {
+func (t *serviceRepository) FetchUserData(param domain.RequestParam) (domain.ResponseParam, error) {
 
 	result := domain.ResponseParam{}
 
-	db := db.CreateDBConnection()
-	defer db.Close()
-
-	err := db.Table("users").
+	err := t.db.Table("users").
 		Select(`
 			user_id
 		, user_name

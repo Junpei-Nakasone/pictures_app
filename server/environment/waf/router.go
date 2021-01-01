@@ -3,14 +3,6 @@ package waf
 import (
 	"net/http"
 
-	api001 "pictures_app/api/api001/handler"
-	api003 "pictures_app/api/api003/handler"
-	api004 "pictures_app/api/api004/handler"
-	api005 "pictures_app/api/api005/handler"
-	api006 "pictures_app/api/api006/handler"
-	api007 "pictures_app/api/api007/infra/web"
-	api008 "pictures_app/api/api008/infra/web"
-
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 )
@@ -22,14 +14,11 @@ func NewRouter(e *echo.Echo, h Handler) {
 		return c.String(http.StatusOK, "PONG")
 	})
 
-	e.GET("sample", api001.SampleAPI)
+	e.GET("sample", h.api001.SampleAPI)
 	e.GET("fetchLatestImages", h.api002.FetchImages)
-	e.POST("addJoke", api003.AddJoke)
-	e.PUT("updateJoke", api004.UpdateJoke)
-	e.DELETE("deleteJoke", api005.DeleteJoke)
-	e.POST("addImage", api006.AddImage)
-	e.POST("login", api007.Login)
-	e.POST("addNewUser", api008.AddNewUser)
+	e.POST("addImage", h.api006.AddImage)
+	e.POST("login", h.api007.Login)
+	e.POST("addNewUser", h.api008.AddNewUser)
 
 	e.Use(middleware.CORS())
 

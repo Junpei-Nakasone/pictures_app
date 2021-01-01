@@ -1,4 +1,4 @@
-package infra
+package data
 
 import (
 	"pictures_app/api/api002/domain"

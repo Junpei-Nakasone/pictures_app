@@ -1,12 +1,13 @@
-package handler
+package web
 
 import (
 	"fmt"
 	"io"
 	"net/http"
-	"pictures_app/api/api006/domain"
-	"pictures_app/environment/db"
 	"os"
+	"pictures_app/api/api006/domain"
+	"pictures_app/api/api006/usecase"
+	"pictures_app/environment/db"
 	"strconv"
 	"strings"
 	"time"
@@ -17,20 +18,29 @@ import (
 	"github.com/labstack/echo"
 )
 
+type handler struct {
+	s usecase.Service
+}
+
+type Handler interface {
+	AddImage(c echo.Context) error
+}
+
+func NewHandler(s usecase.Service) Handler {
+	return &handler{s: s}
+}
+
 // AddImage is to Add Image.
-func AddImage(c echo.Context) error {
+func (h *handler) AddImage(c echo.Context) error {
 
 	file, err := c.FormFile("image")
 	if err != nil {
 		return err
 	}
 
-	// fileName := file.Filename
 	now := time.Now()
 	fileName := now.Format("2006-01-02-15-04-05-06")
 
-	//  := strings.Join(strings.Fields(strNow), "")
-	// fileName := strNow + ".png"
 	src, err := file.Open()
 	if err != nil {
 		return err
@@ -75,13 +85,11 @@ func AddImage(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println(data)
-
-	fmt.Println(data.PictureID)
 
 	return c.NoContent(http.StatusOK)
 }
 
+// TODO: api/common配下に移動する
 func uploadObject(filename string) (resp *s3.PutObjectOutput) {
 	f, err := os.Open(filename)
 	if err != nil {

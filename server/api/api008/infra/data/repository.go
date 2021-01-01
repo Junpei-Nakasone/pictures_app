@@ -2,14 +2,21 @@ package data
 
 import (
 	"pictures_app/api/api008/domain"
-	"pictures_app/environment/db"
+	"pictures_app/api/api008/usecase/repository"
+
+	"github.com/jinzhu/gorm"
 )
 
-// AddNewUser ユーザー新規登録API
-func AddNewUser(param domain.RequestParam) (domain.ResponseParam, error) {
+type serviceRepository struct {
+	db *gorm.DB
+}
 
-	db := db.CreateDBConnection()
-	defer db.Close()
+func NewServiceRepository(db *gorm.DB) repository.ServiceRepository {
+	return &serviceRepository{db: db}
+}
+
+// AddNewUser ユーザー新規登録API
+func (t *serviceRepository) AddNewUser(param domain.RequestParam) (domain.ResponseParam, error) {
 
 	data := domain.User{
 		UserName:     param.UserName,
@@ -20,7 +27,7 @@ func AddNewUser(param domain.RequestParam) (domain.ResponseParam, error) {
 		IconImage: nil,
 	}
 
-	err := db.Table("users").
+	err := t.db.Table("users").
 		Create(&data).Error
 
 	if err != nil {
