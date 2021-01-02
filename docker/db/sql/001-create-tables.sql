@@ -14,7 +14,7 @@ CREATE TABLE pictures (
   user_id int NOT NULL,
   image_url varchar(200),
   image_note varchar(250),
-  prefecture_cd varchar(2),
+  prefecture_category_cd varchar(2),
   view_category_cd varchar(2),
   like_count int,
   published_at timestamp,
