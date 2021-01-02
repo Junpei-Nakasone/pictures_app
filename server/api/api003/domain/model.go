@@ -2,7 +2,7 @@ package domain
 
 // RequestParam リスエストパラメータ
 type RequestParam struct {
-	PrefectureCd *string `validate:"required" json:"prefecture_cd"`
+	PrefectureCd *string `validate:"required" json:"prefecture_category_cd"`
 }
 
 // Picture contains each picture
