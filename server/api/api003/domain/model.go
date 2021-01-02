@@ -1,5 +1,10 @@
 package domain
 
+// RequestParam リスエストパラメータ
+type RequestParam struct {
+	PrefectureCd *string `validate:"required" json:"prefecture_cd"`
+}
+
 // Picture contains each picture
 type Picture struct {
 	PictureID   int    `json:"picture_id"`
