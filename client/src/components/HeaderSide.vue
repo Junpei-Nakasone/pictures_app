@@ -9,7 +9,7 @@
           color="blue-grey lighten-4"
           large
           class="ma-1"
-        ><v-icon>mdi-pencil-outline</v-icon>投稿する</v-btn>
+        ><v-icon>mdi-camera</v-icon>投稿する</v-btn>
       </router-link>
       <v-btn
         @click="logout"

@@ -1,40 +1,64 @@
 <template>
-  <div>
-    <v-card :ripple="false" color="blue-grey darken-1" elevation="5" shaped tabindex="-1" uk-slider="finite: false">
-      <div class="uk-position-relative" id="category?_card_content">
-        <ul
-          id="category_choice"
-          class="uk-slider-items uk-grid uk-grid-column-small uk-child-width-1-2 uk-child-width-1-4-@s uk-child-width-1-6"
-        ></ul>
-      </div>
-    </v-card>
+<div>
+  <v-container fluid>
+    <v-row align="center">
+      <v-col
+        class="d-flex"
+        cols="12"
+        sm="6"
+      >
+        <v-select
+          :items="viewCategories"
+          item-text="view_name"
+          item-value="view_category_cd"
+          label="景色"
+          v-model="items"
+          @change="fetchImageByPrefectureCategoryCd(items)"
+        ></v-select>
+      </v-col>
+    </v-row>
+  </v-container>
+  <PostList
+    :postType="viewPosts"
+    />
   </div>
 </template>
-
 <script>
-import PostList from '@/components/PostList';
-import api from '@/services/api';
+import PostList from '@/components/PostList'
+import axios from 'axios'
+import api from '@/services/api'
+
 
 export default {
   components: {
     PostList,
   },
-
-  data() {
-    return {
-      categories: [
-        {
-          viewCategoryCd: "1",
-          viewCategoryName: "空"
-        },
-        {
-          viewCategoryCd: "2",
-          viewCategoryName: "海"
-        },
-      ]
+    data() {
+      return {
+        viewCategories: [],
+        viewPosts: []
+      }
+    },
+    async mounted() {
+      api.get('/fetchViewCategories')
+      .then((res) => {
+        this.viewCategories = res.data
+        console.log(this.viewCategories)
+      })
+    },
+    methods: {
+      fetchImageByPrefectureCategoryCd(value) {
+        alert(value)
+        api.post('/fetchImageByViewCategoryCd',{
+          'view_category_cd': value
+        })
+        .then((res) => {
+          console.log(res)
+          this.viewPosts = res.data
+        })
+      }
     }
   }
-}
 </script>
 
 <style>
