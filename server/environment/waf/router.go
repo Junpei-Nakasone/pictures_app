@@ -18,6 +18,7 @@ func NewRouter(e *echo.Echo, h Handler) {
 	e.GET("fetchLatestImages", h.api002.FetchImages)
 	e.POST("fetchImageByPrefectureCd", h.api003.FetchImagesByPrefectureCd)
 	e.GET("fetchPrefectureCategories", h.api004.FetchPrefectureCategories)
+	e.GET("fetchViewCategories", h.api005.FetchViewCategories)
 	e.POST("addImage", h.api006.AddImage)
 	e.POST("login", h.api007.Login)
 	e.POST("addNewUser", h.api008.AddNewUser)
