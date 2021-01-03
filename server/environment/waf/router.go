@@ -22,6 +22,7 @@ func NewRouter(e *echo.Echo, h Handler) {
 	e.POST("addImage", h.api006.AddImage)
 	e.POST("login", h.api007.Login)
 	e.POST("addNewUser", h.api008.AddNewUser)
+	e.POST("fetchImageByViewCategoryCd", h.api009.FetchImagesByViewCategoryCd)
 
 	e.Use(middleware.CORS())
 
