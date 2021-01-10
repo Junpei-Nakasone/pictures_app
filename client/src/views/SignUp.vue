@@ -164,12 +164,16 @@ export default {
       })
       .then(() => {
         if (this.isLoggedIn) {
-          alert('新規登録成功')
           this.$store.dispatch("message/setSuccessMessage", {
             message: "新規登録成功"
           })
           this.$router.push("/")
         }
+      })
+      .catch((err) => {
+        this.$store.dispatch("message/setErrorMessage", {
+          message: "新規登録に失敗しました"
+        })
       })
     }
   }

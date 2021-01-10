@@ -79,13 +79,14 @@ export default {
       })
       .then(() => {
         if (this.isLoggedIn) {
-          alert('ログイン成功')
+          this.$store.dispatch("message/setSuccessMessage", {
+            message: "ログインしました"
+          })
           this.$router.push("/")
         }
         if (!this.isLoggedIn) {
-          alert('ログイン失敗')
           this.$store.dispatch("message/setErrorMessage", {
-          message: " ユーザー名かパスワード名が間違っています"
+          message: "ユーザー名かパスワード名が間違っています"
         })
         }
       })

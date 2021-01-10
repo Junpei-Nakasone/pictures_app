@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>this is sample</div>
+    <div>this is sample20200104</div>
     <div>
       {{msg}}
     </div>

@@ -14,6 +14,18 @@
     </v-alert>
     <v-alert
       dense
+      type="info"
+      class="message"
+      border="left"
+      elevation="10"
+      dark
+      show
+      v-if="message.info"
+    >
+      {{message.error}}
+    </v-alert>
+    <v-alert
+      dense
       type="error"
       class="message"
       border="left"

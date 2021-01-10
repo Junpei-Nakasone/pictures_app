@@ -22,15 +22,11 @@ const authModule = {
   },
   mutations: {
     set(state, payload) {
-      alert('set run')
-      alert('set check')
-      // console.log(payload)
       console.log("in sert",payload)
       state.username = payload.user_name
       state.isLoggedIn = true
       state.id = payload.user_id
       console.log("ログインデータ", state)
-      alert('set終了')
     },
     clear(state) {
       state.username = ''
@@ -40,7 +36,7 @@ const authModule = {
   },
   actions: {
     login(context, payload) {
-      alert('login on store running')
+
       console.log("logindata ",payload)
       // TODO: send tdo login API
 
@@ -54,11 +50,9 @@ const authModule = {
         // context.dispatch('reload')
         // .then(user => user)
       })
-      .catch(error => error.response,
-        alert('ログイン失敗'))
+      .catch(error => error.response)
     },
     reload(context) {
-      alert('reload run')
       console.log('reloadデータ', context.user_name)
       const userdata = {
         username: context.username,
@@ -69,7 +63,6 @@ const authModule = {
       })
     },
     logout(context) {
-      alert('logout vuex')
       return context.commit('clear')
     }
   }
@@ -85,7 +78,8 @@ const messageModule = {
   },
   getters: {
     success: state => state.success,
-    info: state => state.warnings,
+    info: state => state.info,
+    warnings: state => state.warnings,
     error: state => state.error,
   },
   mutations: {
@@ -93,14 +87,20 @@ const messageModule = {
       if (payload.success) {
         state.success = payload.success
       }
+      if (payload.info) {
+        state.info = payload.info
+      }
+      if (payload.warnings) {
+        state.warnings = payload.warnings
+      }
       if (payload.error) {
-        alert("setError", payload)
-        console.log("setError", payload)
         state.error = payload.error
       }
     },
     clear(state) {
       state.success = ''
+      state.info = ''
+      state.warnings = []
       state.error = ''
     }
   },
@@ -111,6 +111,22 @@ const messageModule = {
       })
       setTimeout(() => {
         context.dispatch('clearMessages')
+      }, 1500)
+    },
+    setInfoMessage(context, payload) {
+      context.commit('set', {
+        'info': payload.message
+      })
+      setTimeout(() => {
+        context.dispath('clearMessages')
+      }, 1500)
+    },
+    setWarningMessages(context, payload) {
+      context.commit('set', {
+        'warnings': payload.messages
+      })
+      setTimeout(() => {
+        context.dispath('clearMessages')
       }, 1500)
     },
     setErrorMessage(context, payload) {

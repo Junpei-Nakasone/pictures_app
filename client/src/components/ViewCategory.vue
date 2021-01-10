@@ -48,7 +48,6 @@ export default {
     },
     methods: {
       fetchImageByPrefectureCategoryCd(value) {
-        alert(value)
         api.post('/fetchImageByViewCategoryCd',{
           'view_category_cd': value
         })
