@@ -81,15 +81,14 @@
 
 <script>
 import axios from 'axios'
+import api from '@/services/api'
+
 import {
   ValidationProvider,
   ValidationObserver,
   extend,
   localize,
 } from "vee-validate";
-// import ja from "vee-validate/dist/locale/ja.json";
-// import { required, max, min, email, image } from "vee-validate/dist/rules";
-// import { clearSession } from "@/mixins/utility";
 
 export default {
   data() {
@@ -101,13 +100,10 @@ export default {
   methods: {
     onUpload: function() {
       this.images = event.target.files;
-      alert('onUpload run')
       console.log(this.images)
       this.selectedFile()
     },
     selectedFile(event) {
-      alert('selectedFile run')
-      // event.pr();
       this.image = event.target.files[0];
       this.createImage(event.target.files[0]);
     },
@@ -124,9 +120,9 @@ export default {
       console.log(formData)
       formData.append("image", this.images[0]);
       formData.append("user_id", 1)
-      alert('images')
       console.log(formData)
-      axios.post('http://localhost:9999/addImage', formData,{
+
+      api.post('/addImage', formData,{
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -134,6 +130,9 @@ export default {
       .then((res) => {
         console.log(res)
         this.$router.replace("/")
+      })
+      .catch((err) => {
+        console.log(err)
       })
 
 
