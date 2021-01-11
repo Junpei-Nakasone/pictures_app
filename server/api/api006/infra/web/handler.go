@@ -75,6 +75,7 @@ func (h *handler) AddImage(c echo.Context) error {
 
 	// now := time.Now()
 
+	// TODO: data/repositoryに移動する
 	data := domain.Pictures{
 		UserID:      intUserID,
 		ImageURL:    uploadedFileName,

@@ -16,11 +16,11 @@ func NewServiceRepository(db *gorm.DB) repository.ServiceRepository {
 }
 
 // AddNewUser ユーザー新規登録API
-func (t *serviceRepository) AddNewUser(param domain.RequestParam) (domain.ResponseParam, error) {
+func (t *serviceRepository) AddNewUser(param domain.RequestParam, hashedPassword string) (domain.ResponseParam, error) {
 
 	data := domain.User{
 		UserName:     param.UserName,
-		UserPassword: param.Password,
+		UserPassword: &hashedPassword,
 		EmailAddress: param.EmailAddress,
 		Note:         param.Note,
 		// IconImageは未実装

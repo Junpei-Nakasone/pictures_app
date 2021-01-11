@@ -3,6 +3,7 @@ package usecase
 import (
 	"pictures_app/api/api008/domain"
 	"pictures_app/api/api008/usecase/repository"
+	"pictures_app/api/common"
 )
 
 type service struct {
@@ -19,7 +20,11 @@ func NewService(r repository.ServiceRepository) Service {
 
 // AddNewUser ユーザー新規登録API
 func (s *service) AddNewUser(param domain.RequestParam) (domain.ResponseParam, error) {
-	res, err := s.rep.AddNewUser(param)
+	hashedPassword, err := common.HashPassword(*param.Password)
+	if err != nil {
+		return domain.ResponseParam{}, err
+	}
+	res, err := s.rep.AddNewUser(param, hashedPassword)
 	if err != nil {
 		return domain.ResponseParam{}, err
 	}
