@@ -2,6 +2,7 @@ package web
 
 import (
 	"net/http"
+	"os"
 	"pictures_app/api/api001/domain"
 
 	"github.com/labstack/echo"
@@ -22,7 +23,7 @@ func NewHandler() Handler {
 // SampleAPI is made for sample.
 func (h *handler) SampleAPI(c echo.Context) error {
 	result := domain.Result{
-		Name: "sampleAPI..",
+		Name: "sampleAPI.." + os.Getenv("PROTOCOL") + os.Getenv("USER"),
 	}
 	return c.JSON(http.StatusOK, result)
 }
