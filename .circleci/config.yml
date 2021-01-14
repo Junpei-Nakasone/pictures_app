@@ -37,7 +37,7 @@ jobs:
       - npm_install
       - run:
           name: build
-          command: API_ID=$API_ID API_TOKEN=$API_TOKEN npm run build
+          command: AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY npm run build
       - aws-s3/sync:
           from: dist
           to: s3://picture-app.link/
