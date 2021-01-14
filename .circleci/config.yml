@@ -12,13 +12,13 @@ executors:
 commands:
   npm_install:
     steps:
-      # - restore_cache:
-      #     key: dependency-cache-{{ checksum "package.json" }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
       - run: npm install
-      # - save_cache:
-      #     key: dependency-cache-{{ checksum "package.json" }}
-      #     paths:
-      #         - node_modules
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+              - node_modules
 
 jobs:
   build:
@@ -38,10 +38,10 @@ jobs:
       - run:
           name: build
           command: AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY npm run build
-      - aws-s3/sync:
-          from: dist
-          to: s3://picture-app.link/
-          overwrite: true
+      # - aws-s3/sync:
+      #     from: dist
+      #     to: s3://picture-app.link/
+      #     overwrite: true
 
 workflows:
   version: 2
