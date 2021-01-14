@@ -1,56 +1,50 @@
 version: 2.1
 
 orbs:
+  aws-ecr: circleci/aws-ecr@6.7.1
+  aws-ecs: circleci/aws-ecs@1.1.0
   aws-s3: circleci/aws-s3@1.0.11
 
+# 実行環境の定義
 executors:
   default:
+    working_directory: ~/pictures_app
     docker:
-      - image: circleci/node:10.17.0
-      - image: circleci/python:2.7
+      - image: circleci/node:10.7.0
 
+# 実行コマンドの定義
 commands:
   npm_install:
     steps:
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run: npm install
-      - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-              - node_modules
+      - run:
+          name: Start npm install
+          command: |
+            cd frontend
+            sudo apt-get install npm
+            npm install
 
+# ジョブの定義
 jobs:
-  build:
+  vue_deploy:
     executor: default
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - npm_install
-      # - run: npm run test
-
-  deploy:
-    executor: default
-    working_directory: ~/repo/client
     steps:
       - checkout
       - npm_install
       - run:
           name: build
-          command: AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY npm run build
+          command: |
+            cd client
+            npm run build
       # - aws-s3/sync:
-      #     from: dist
-      #     to: s3://picture-app.link/
+      #     from: client/dist
+      #     to: s3:///
       #     overwrite: true
 
 workflows:
   version: 2
   continuous-deploy:
     jobs:
-      # - build
-      - deploy:
-          # requires:
-          #   - build
+      - vue_deploy:
           filters:
             branches:
               only: main_client
