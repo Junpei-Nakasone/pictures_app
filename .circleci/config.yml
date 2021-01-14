@@ -31,7 +31,7 @@ jobs:
 
   deploy:
     executor: default
-    working_directory: ~/repo
+    working_directory: ~/repo/client
     steps:
       - checkout
       - npm_install
