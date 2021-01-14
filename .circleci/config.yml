@@ -19,7 +19,7 @@ commands:
       - run:
           name: Start npm install
           command: |
-            cd frontend
+            cd client
             sudo apt-get install npm
             npm install
 
