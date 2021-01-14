@@ -35,10 +35,10 @@ jobs:
           command: |
             cd client
             npm run build
-      # - aws-s3/sync:
-      #     from: client/dist
-      #     to: s3:///
-      #     overwrite: true
+      - aws-s3/sync:
+          from: client/dist
+          to: s3://picture-app.link/
+          overwrite: true
 
 workflows:
   version: 2
