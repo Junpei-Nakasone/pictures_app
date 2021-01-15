@@ -4,3 +4,4 @@ TODO
 .env
 client/dist
 .DS_Store
+setenv.go

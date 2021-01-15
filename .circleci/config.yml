@@ -1,7 +1,53 @@
-version: 2
-jobs:
-  build:
+version: 2.1
+
+orbs:
+  aws-s3: circleci/aws-s3@1.0.11
+
+# 実行環境の定義
+executors:
+  default:
+    working_directory: ~/pictures_app
     docker:
-      - image: circleci/golang:1.11.2
+      - image: circleci/node:10.7.0
+
+# 実行コマンドの定義
+commands:
+  npm_install:
     steps:
-      - run: echo "hello world"
+      - run:
+          name: Start npm install
+          command: |
+            cd client
+            sudo apt-get install npm
+            npm install
+
+# ジョブの定義
+jobs:
+  vue_deploy:
+    executor: default
+    steps:
+      - checkout
+      - npm_install
+      - run:
+          name: build
+          command: |
+            cd client
+            npm run build
+      - run:
+          name: ls_command
+          command: |
+            ls
+            pwd
+      - aws-s3/sync:
+          from: client/dist
+          to: s3://picture-app.link/
+          overwrite: true
+
+workflows:
+  version: 2
+  continuous-deploy:
+    jobs:
+      - vue_deploy:
+          filters:
+            branches:
+              only: main_client
