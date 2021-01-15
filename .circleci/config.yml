@@ -34,7 +34,7 @@ jobs:
             cd client
             npm run build
       - aws-s3/sync:
-          from: dist
+          from: client/dist
           to: s3://picture-app.link/
           overwrite: true
 
