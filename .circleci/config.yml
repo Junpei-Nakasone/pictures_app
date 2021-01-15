@@ -33,6 +33,11 @@ jobs:
           command:
             cd client
             npm run build
+      - run:
+          name: ls_command
+          command:
+            ls
+            pwd
       - aws-s3/sync:
           from: client/dist
           to: s3://picture-app.link/
