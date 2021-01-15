@@ -16,7 +16,7 @@ commands:
     steps:
       - run:
           name: Start npm install
-          command:
+          command: |
             cd client
             sudo apt-get install npm
             npm install
