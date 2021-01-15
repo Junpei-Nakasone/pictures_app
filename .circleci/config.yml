@@ -1,8 +1,6 @@
 version: 2.1
 
 orbs:
-  aws-ecr: circleci/aws-ecr@6.7.1
-  aws-ecs: circleci/aws-ecs@1.1.0
   aws-s3: circleci/aws-s3@1.0.11
 
 # 実行環境の定義
@@ -18,7 +16,7 @@ commands:
     steps:
       - run:
           name: Start npm install
-          command: |
+          command:
             cd client
             sudo apt-get install npm
             npm install
@@ -32,7 +30,7 @@ jobs:
       - npm_install
       - run:
           name: build
-          command: |
+          command:
             cd client
             npm run build
       - aws-s3/sync:
