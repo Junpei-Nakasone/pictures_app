@@ -30,12 +30,12 @@ jobs:
       - npm_install
       - run:
           name: build
-          command:
+          command: |
             cd client
             npm run build
       - run:
           name: ls_command
-          command:
+          command: |
             ls
             pwd
       - aws-s3/sync:
