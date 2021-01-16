@@ -11,7 +11,7 @@
           :items="prefectureCategories"
           item-text="prefecture_name"
           item-value="prefecture_category_cd"
-          label="都道府県"
+          label="都道府県を選択してください"
           v-model="items"
           @change="fetchImageByPrefectureCd(items)"
         ></v-select>
