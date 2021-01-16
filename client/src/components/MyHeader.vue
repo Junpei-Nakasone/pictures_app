@@ -89,10 +89,27 @@
           </template>
           <v-list class="responsiveMenu">
             <v-list-item>
-              <v-list-item-title><router-link to="/signup">新規登録</router-link></v-list-item-title>
+              <v-list-item-title>
+                <v-btn
+                  color="white"
+                depressed
+                  class="ma-1"
+                  to="signup"
+                >新規登録
+                </v-btn>
+                </v-list-item-title>
             </v-list-item>
             <v-list-item>
-              <v-list-item-title><router-link to="/login">ログイン</router-link></v-list-item-title>
+              <v-list-item-title>
+                <v-btn
+                  color="white"
+                  depressed
+                  class="ma-1"
+                  to="login"
+                >
+                  ログイン
+                </v-btn>
+                </v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
