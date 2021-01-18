@@ -42,6 +42,7 @@
         class="mr-4 mt-14"
         x-large
         elevation="3"
+        type=submit
       >
         <span>
           <v-icon>mdi-send-outline</v-icon>
@@ -75,6 +76,11 @@ export default {
       postData: {}
     }
   },
+  computed: {
+    username : function () {
+      this.postData.id = this.$store.getters["auth/id"]
+    }
+  },
   async mounted() {
     api.get('/fetchPrefectureCategories')
       .then((res) => {
@@ -91,7 +97,8 @@ export default {
     openUpload () {
         document.getElementById('file-field').click()
       },
-      updatePreview (e) {
+    updatePreview (e) {
+        this.images = e.target.files
         console.log('e', e)
         var reader, files = e.target.files
         if (files.length === 0) {
@@ -104,10 +111,12 @@ export default {
         reader.readAsDataURL(files[0])
       },
     submitPost() {
+      alert('sendpost run')
       const formData = new FormData();
       console.log(formData)
       formData.append("image", this.images[0]);
-      formData.append("view")
+      formData.append("view_category_cd", this.postData.viewCategoryCd)
+      formData.append("prefecture_category_cd", this.postData.prefectureCategoryCd)
       formData.append("user_id", 1)
       console.log(formData)
 
@@ -128,7 +137,7 @@ export default {
       this.postData.viewCategoryCd = value
     },
     updatePrefectureData(value) {
-      this.postData.prefectureData = value
+      this.postData.prefectureCategoryCd = value
     }
 }
 }

@@ -21,7 +21,9 @@ func (t *serviceRepository) FetchImagesByPrefectureCd(param domain.RequestParam)
 
 	result := []domain.Picture{}
 
-	err := t.db.Where(`prefecture_category_cd = ?`, param.PrefectureCd).Find(&result).Error
+	err := t.db.Where(`prefecture_category_cd = ?`, param.PrefectureCd).
+		Order("published_at DESC").
+		Find(&result).Error
 
 	return result, err
 }
