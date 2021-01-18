@@ -21,7 +21,9 @@ func (t *serviceRepository) FetchImagesByViewCategoryCd(param domain.RequestPara
 
 	result := []domain.Picture{}
 
-	err := t.db.Where(`view_category_cd = ?`, param.ViewCategoryCd).Find(&result).Error
+	err := t.db.Where(`view_category_cd = ?`, param.ViewCategoryCd).
+		Order("published_at DESC").
+		Find(&result).Error
 
 	return result, err
 }

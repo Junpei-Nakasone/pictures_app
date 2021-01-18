@@ -70,6 +70,9 @@ func (h *handler) AddImage(c echo.Context) error {
 	// param.ImageURL = uploadedFileName
 
 	userID := c.FormValue("user_id")
+	viewCategoryCd := c.FormValue("view_category_cd")
+	prefectureCategoryCd := c.FormValue("prefecture_category_cd")
+
 	intUserID, _ := strconv.Atoi(userID)
 	// param.UserID = userID
 
@@ -77,9 +80,11 @@ func (h *handler) AddImage(c echo.Context) error {
 
 	// TODO: data/repositoryに移動する
 	data := domain.Pictures{
-		UserID:      intUserID,
-		ImageURL:    uploadedFileName,
-		PublishedAt: time.Now(),
+		UserID:               intUserID,
+		ImageURL:             uploadedFileName,
+		PrefectureCategoryCd: prefectureCategoryCd,
+		ViewCategoryCd:       viewCategoryCd,
+		PublishedAt:          time.Now(),
 	}
 
 	err = db.Table("pictures").Create(&data).Error
