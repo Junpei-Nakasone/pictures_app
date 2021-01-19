@@ -10,8 +10,8 @@ type RequestParam struct {
 	PrefectureCategoryCd string `json:"prefecture_category_cd"`
 }
 
-// Pictures is for picture table
-type Pictures struct {
+// Picture is for picture table
+type Picture struct {
 	PictureID            int       `json:"picture_id"`
 	UserID               int       `json:"user_id"`
 	ImageURL             string    `json:"image_url"`

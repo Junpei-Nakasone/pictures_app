@@ -3,7 +3,6 @@ package data
 import (
 	"pictures_app/api/api006/domain"
 	"pictures_app/api/api006/usecase/repository"
-	"time"
 
 	"github.com/jinzhu/gorm"
 )
@@ -17,15 +16,10 @@ func NewServiceRepository(db *gorm.DB) repository.ServiceRepository {
 	return &serviceRepository{db: db}
 }
 
-func (t *serviceRepository) AddImage(userID int, imageURL string) error {
-	data := domain.Pictures{
-		UserID:      userID,
-		ImageURL:    imageURL,
-		PublishedAt: time.Now(),
-	}
+func (t *serviceRepository) AddImage(pictureData domain.Picture) error {
 
 	err := t.db.Table("pictures").
-		Create(&data).Error
+		Create(&pictureData).Error
 
 	return err
 }
