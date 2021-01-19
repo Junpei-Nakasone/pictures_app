@@ -36,7 +36,7 @@
                 color="blue-grey lighten-3"
                 elevation="2"
                 class="mr-4 mt-4"
-                @click="login()"
+                @click="demoLogin()"
               >
                 デモユーザーでログイン(確認用)
               </v-btn>
@@ -76,6 +76,28 @@ export default {
       this.$store.dispatch("auth/login", {
         username: this.form.username,
         password: this.form.password,
+      })
+      .then(() => {
+        if (this.isLoggedIn) {
+          this.$store.dispatch("message/setSuccessMessage", {
+            message: "ログインしました"
+          })
+          this.$router.push("/")
+        }
+        if (!this.isLoggedIn) {
+          this.$store.dispatch("message/setErrorMessage", {
+          message: "ユーザー名かパスワード名が間違っています"
+        })
+        }
+      })
+      .catch((err) => {
+      })
+    },
+    demoLogin()  {
+
+      this.$store.dispatch("auth/login", {
+        username: "demo_user",
+        password: "demo_password",
       })
       .then(() => {
         if (this.isLoggedIn) {
