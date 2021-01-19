@@ -1,20 +1,15 @@
 package web
 
 import (
-	"fmt"
 	"io"
 	"net/http"
 	"os"
 	"pictures_app/api/api006/domain"
 	"pictures_app/api/api006/usecase"
-	"pictures_app/environment/db"
+	"pictures_app/api/common"
 	"strconv"
-	"strings"
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/labstack/echo"
 )
 
@@ -57,31 +52,27 @@ func (h *handler) AddImage(c echo.Context) error {
 		return err
 	}
 
-	uploadObject("tmp/" + fileName)
+	// uploadObject("tmp/" + fileName)
+	common.UploadObject("tmp/" + fileName)
 
 	os.Remove(dstFile.Name())
 	uploadedFileName := "https://20201108-bucket2.s3-ap-northeast-1.amazonaws.com/" + fileName
 
-	db := db.CreateDBConnection()
-	defer db.Close()
-
-	// param := domain.RequestParam{}
-
-	// param.ImageURL = uploadedFileName
-
 	userID := c.FormValue("user_id")
 	intUserID, _ := strconv.Atoi(userID)
-	// param.UserID = userID
+	prefectureCategoryCd := c.FormValue("prefecture_category_cd")
+	viewCategoryCd := c.FormValue("view_category_cd")
 
-	// now := time.Now()
-
-	data := domain.Pictures{
-		UserID:      intUserID,
-		ImageURL:    uploadedFileName,
-		PublishedAt: time.Now(),
+	data := domain.Picture{
+		UserID:               intUserID,
+		ImageURL:             uploadedFileName,
+		PrefectureCategoryCd: prefectureCategoryCd,
+		ViewCategoryCd:       viewCategoryCd,
+		PublishedAt:          time.Now(),
 	}
 
-	err = db.Table("pictures").Create(&data).Error
+	err = h.s.AddImage(data)
+
 	if err != nil {
 		return err
 	}
@@ -90,32 +81,32 @@ func (h *handler) AddImage(c echo.Context) error {
 }
 
 // TODO: api/common配下に移動する
-func uploadObject(filename string) (resp *s3.PutObjectOutput) {
-	f, err := os.Open(filename)
-	if err != nil {
-		panic(err)
-	}
-	var (
-		s3session *s3.S3
-	)
-	const (
-		BUCKETNAME = "20201108-bucket2"
-		REGION     = "ap-northeast-1"
-	)
-	s3session = s3.New(session.Must(session.NewSession(&aws.Config{
-		Region: aws.String(REGION),
-	})))
+// func uploadObject(filename string) (resp *s3.PutObjectOutput) {
+// 	f, err := os.Open(filename)
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// 	var (
+// 		s3session *s3.S3
+// 	)
+// 	const (
+// 		BUCKETNAME = "20201108-bucket2"
+// 		REGION     = "ap-northeast-1"
+// 	)
+// 	s3session = s3.New(session.Must(session.NewSession(&aws.Config{
+// 		Region: aws.String(REGION),
+// 	})))
 
-	fmt.Println("Uploading:", filename)
-	resp, err = s3session.PutObject(&s3.PutObjectInput{
-		Body:   f,
-		Bucket: aws.String(BUCKETNAME),
-		Key:    aws.String(strings.Split(filename, "/")[1]),
-		ACL:    aws.String(s3.BucketCannedACLPublicRead),
-	})
+// 	fmt.Println("Uploading:", filename)
+// 	resp, err = s3session.PutObject(&s3.PutObjectInput{
+// 		Body:   f,
+// 		Bucket: aws.String(BUCKETNAME),
+// 		Key:    aws.String(strings.Split(filename, "/")[1]),
+// 		ACL:    aws.String(s3.BucketCannedACLPublicRead),
+// 	})
 
-	if err != nil {
-		panic(err)
-	}
-	return resp
-}
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// 	return resp
+// }
