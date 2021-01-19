@@ -3,9 +3,10 @@
     <div v-if="isLoggedIn">
     <v-toolbar flat class="mainHeader">
       <router-link to="/" id="title">
-        <v-toolbar-title>Pictures</v-toolbar-title>
+        <v-toolbar-title>View Pictures</v-toolbar-title>
       </router-link>
       <v-spacer></v-spacer>
+      {{username}}&nbsp;様
       <v-toolbar-items class="hidden-xs-only">
         <v-btn
           large
