@@ -13,7 +13,7 @@ require (
 	github.com/labstack/gommon v0.3.0 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/steinfletcher/apitest v1.4.16
-	golang.org/x/crypto v0.0.0-20201002170205-7f63de1d35b0 // indirect
+	golang.org/x/crypto v0.0.0-20201002170205-7f63de1d35b0
 	gopkg.in/go-playground/validator.v9 v9.31.0 // indirect
 	gorm.io/driver/mysql v1.0.3 // indirect
 )

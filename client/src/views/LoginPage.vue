@@ -28,7 +28,7 @@
                 prepend-inner-icon="mdi-lock"
               ></v-text-field>
               <v-btn block elevation="2" class="mr-4 mt-4" @click="login()">
-                Login
+                ログイン
               </v-btn>
               </form>
               <v-btn

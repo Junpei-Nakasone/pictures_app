@@ -11,7 +11,7 @@
           :items="viewCategories"
           item-text="view_name"
           item-value="view_category_cd"
-          label="景色"
+          label="景色を選択してください"
           v-model="items"
           @change="fetchImageByPrefectureCategoryCd(items)"
         ></v-select>

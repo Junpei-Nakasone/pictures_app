@@ -29,6 +29,11 @@
         ログアウト
       </v-btn>
     </div>
+    <div class="d-sm-none">
+      <v-menu offset-y>
+        <HeaderDropdown />
+      </v-menu>
+    </div>
   </div>
 <!-- ログインしていない時 -->
   <div v-else>
@@ -56,11 +61,19 @@
         </v-btn>
       </router-link>
     </div>
+    <div class="d-sm-none">
+      <HeaderDropdown />
+    </div>
   </div>
 </template>
 
 <script>
+import HeaderDropdown from "@/components/HeaderDropdown";
+
 export default {
+  components: {
+    HeaderDropdown,
+  },
   computed: {
     isLoggedIn : function () {
       return this.$store.getters["auth/isLoggedIn"]

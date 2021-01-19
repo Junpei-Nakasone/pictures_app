@@ -16,18 +16,18 @@ func NewServiceRepository(db *gorm.DB) repository.ServiceRepository {
 }
 
 // FetchUserData ログインするユーザー情報を取得
-func (t *serviceRepository) FetchUserData(param domain.RequestParam) (domain.ResponseParam, error) {
+func (t *serviceRepository) FetchUserData(param domain.RequestParam) (domain.UserData, error) {
 
-	result := domain.ResponseParam{}
+	result := domain.UserData{}
 
 	err := t.db.Table("users").
 		Select(`
 			user_id
 		, user_name
+		, user_password
 		, note
 		, icon_image`).
-		Where(`user_name = ?
-		AND user_password = ?`, param.UserName, param.Password).
+		Where(`user_name = ?`, param.UserName).
 		Find(&result).Error
 
 	return result, err
