@@ -11,8 +11,8 @@ import (
 
 // CreateDBConnection returns db
 func CreateDBConnection() *gorm.DB {
-	// DBMS := "mysql"
-	DBMS := os.Getenv("DBMS")
+	DBMS := "mysql"
+	// DBMS := os.Getenv("DBMS")
 	// USER := "root"
 	// USER := os.Getenv("USER")
 	// PASSWORD := "root"

@@ -5,3 +5,4 @@ TODO
 client/dist
 .DS_Store
 setenv.go
+server/environment/db/mysql.go
