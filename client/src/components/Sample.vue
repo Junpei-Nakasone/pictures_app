@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>this is sample20200114circleCI</div>
+    <div>this is sample20200120</div>
     <div>
       {{msg}}
     </div>
@@ -29,8 +29,6 @@ export default {
     }
   },
   async mounted() {
-    // axios.get('http://localhost:9999/sample')
-    // axios.get('http://18.180.158.120:9999/sample')
     api.get('/sample')
     .then((res) => {
       console.log(res)
