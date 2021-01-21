@@ -4,7 +4,7 @@ import "os"
 
 // SetEnvVariables 環境変数を設定
 func SetEnvVariables() {
-	os.Setenv("DBMS", "mysql")
+	os.Setenv("DBMS", "mysqlest")
 	os.Setenv("USER", "root")
 	os.Setenv("PASSWORD", "root")
 	os.Setenv("PROTOCOL", "tcp(localhost:3306)")
