@@ -111,7 +111,6 @@ export default {
         reader.readAsDataURL(files[0])
       },
     submitPost() {
-      alert('sendpost run')
       const formData = new FormData();
       console.log(formData)
       formData.append("image", this.images[0]);

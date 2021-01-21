@@ -4,5 +4,5 @@ TODO
 .env
 client/dist
 .DS_Store
-setenv.go
+server/env/setenv.go
 server/environment/db/mysql.go
