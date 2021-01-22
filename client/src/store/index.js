@@ -106,7 +106,6 @@ const messageModule = {
   },
   actions: {
     setSuccessMessage(context, payload) {
-      alert('setSuccessMessage')
       context.commit('set', {
         'success': payload.message
       })
@@ -131,7 +130,6 @@ const messageModule = {
       }, 1500)
     },
     setErrorMessage(context, payload) {
-      alert('sertErrorMessage')
       console.log("setErrorM",payload)
       context.commit('set', {
         'error': payload.message
