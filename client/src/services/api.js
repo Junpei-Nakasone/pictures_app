@@ -1,5 +1,4 @@
 import axios from 'axios'
-import store from '@/store'
 
 const api = axios.create({
   baseURL: process.env.VUE_APP_API_ENDPOINT,
@@ -9,9 +8,6 @@ const api = axios.create({
   }
 })
 
-
-// API共通処理
-// トークン認証など入れたい
 
 
 export default api

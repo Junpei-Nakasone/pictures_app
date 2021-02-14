@@ -7,7 +7,7 @@ RUN apk update && apk add git
 
 RUN go build -o main .
 
-EXPOSE 9999
+EXPOSE 4567
 
 CMD ["go","run","main.go"]
 

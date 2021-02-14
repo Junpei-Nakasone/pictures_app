@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>this is sample20200121gitignore</div>
+    <div>this is sample20200209HTTPS</div>
     <div>
       {{msg}}
     </div>
