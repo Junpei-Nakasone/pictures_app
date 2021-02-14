@@ -13,5 +13,5 @@ func main() {
 
 	app := environment.NewApp(db)
 
-	app.App.Start(":9999")
+	app.App.Start(":4567")
 }

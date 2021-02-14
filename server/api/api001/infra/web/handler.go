@@ -23,7 +23,7 @@ func NewHandler() Handler {
 // SampleAPI is made for sample.
 func (h *handler) SampleAPI(c echo.Context) error {
 	result := domain.Result{
-		Name: "sampleAPI.." + os.Getenv("PROTOCOL") + os.Getenv("USER"),
+		Name: "sampleAPI0214.." + os.Getenv("USER") + os.Getenv("testparameter"),
 	}
 	return c.JSON(http.StatusOK, result)
 }

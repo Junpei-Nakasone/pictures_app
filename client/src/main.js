@@ -8,7 +8,6 @@ import VueAxios from 'vue-axios'
 
 Vue.config.productionTip = false
 
-// Uikitの導入
 import UIkit from 'uikit'
 import Icons from 'uikit/dist/js/uikit-icons'
 import 'uikit/dist/css/uikit.css'

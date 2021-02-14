@@ -33,21 +33,17 @@ jobs:
           command: |
             cd client
             npm run build
-      - run:
-          name: ls_command
-          command: |
-            ls
-            pwd
-      - aws-s3/sync:
-          from: client/dist
-          to: s3://picture-app.link/
-          overwrite: true
+      # - aws-s3/sync:
+      #     from: client/dist
+      #     to: s3://picture-app.link/
+      #     overwrite: true
 
 workflows:
   version: 2
   continuous-deploy:
     jobs:
-      - vue_deploy:
-          filters:
-            branches:
-              only: main_client
+      # CI/CD整備するまでコメントアウトしておく
+      # - vue_deploy:
+      #     filters:
+      #       branches:
+      #         only: main_client
