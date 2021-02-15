@@ -43,6 +43,6 @@ workflows:
   continuous-deploy:
     jobs:
       - vue_deploy:
-      #     filters:
-      #       branches:
-      #         only: main_client
+          filters:
+            branches:
+              only: main_client
