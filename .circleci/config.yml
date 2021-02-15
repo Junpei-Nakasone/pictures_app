@@ -42,8 +42,7 @@ workflows:
   version: 2
   continuous-deploy:
     jobs:
-      # CI/CD整備するまでコメントアウトしておく
-      # - vue_deploy:
-      #     filters:
-      #       branches:
-      #         only: main_client
+      - vue_deploy:
+          filters:
+            branches:
+              only: main_client
