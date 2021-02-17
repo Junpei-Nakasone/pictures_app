@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "buefy": "^0.9.4",
     "core-js": "^3.6.5",
     "eslint": "^7.18.0",
     "eslint-plugin-vue": "^7.4.1",
