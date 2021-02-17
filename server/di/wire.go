@@ -26,6 +26,9 @@ import (
 	api009data "pictures_app/api/api009/infra/data"
 	api009handler "pictures_app/api/api009/infra/web"
 	api009service "pictures_app/api/api009/usecase"
+	api010data "pictures_app/api/api010/infra/data"
+	api010handler "pictures_app/api/api010/infra/web"
+	api010service "pictures_app/api/api010/usecase"
 	"pictures_app/environment/waf"
 
 	"github.com/jinzhu/gorm"
@@ -58,6 +61,9 @@ func InitializeHandler(d *gorm.DB, e *echo.Echo) waf.Handler {
 	serviceRepository009 := api009data.NewServiceRepository(d)
 	servive009 := api009service.NewService(serviceRepository009)
 	handler009 := api009handler.NewHandler(servive009)
+	serviceRepository010 := api010data.NewServiceRepository(d)
+	servive010 := api010service.NewService(serviceRepository010)
+	handler010 := api010handler.NewHandler(servive010)
 
 	wafHandler := waf.NewHandler(
 		handler001,
@@ -69,6 +75,7 @@ func InitializeHandler(d *gorm.DB, e *echo.Echo) waf.Handler {
 		handler007,
 		handler008,
 		handler009,
+		handler010,
 	)
 
 	return wafHandler
