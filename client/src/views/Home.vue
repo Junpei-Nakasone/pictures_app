@@ -18,6 +18,10 @@
         <v-icon left>mdi-football</v-icon>
         <span>Sample</span>
       </v-tab>
+      <v-tab to="/buefy">
+        <v-icon left>mdi-football</v-icon>
+        <span>Buefy</span>
+      </v-tab>
     </v-tabs>
     <div class="content">
       <transition appear>
