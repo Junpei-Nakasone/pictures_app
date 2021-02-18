@@ -26,7 +26,7 @@ export default {
       console.log(res)
       this.latestPosts = res.data
     })
-    .catch((res) => {
+    .catch((err) => {
       console.log(err)
     })
   }

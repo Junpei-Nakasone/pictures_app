@@ -8,6 +8,8 @@ import PrefectureCategory from '@/components/PrefectureCategory.vue'
 import NewPost from '@/components/NewPost.vue'
 import Sample from '@/components/Sample.vue'
 import SignUp from '@/views/SignUp.vue'
+import Buefy from '@/components/buefy.vue'
+import Detail from '@/components/detail.vue'
 
 Vue.use(VueRouter)
 
@@ -36,6 +38,10 @@ const routes = [
         path: '/sample',
         component: Sample
       },
+      {
+        path: '/buefy',
+        component: Buefy
+      }
     ]
   },
   {
@@ -53,6 +59,11 @@ const routes = [
   {
     path: '/signup',
     component: SignUp
+  },
+  {
+    path: '/detail/:picture_id',
+    name: 'detail',
+    component: Detail
   }
 ]
 
