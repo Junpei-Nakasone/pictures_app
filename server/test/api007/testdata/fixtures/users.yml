@@ -1,6 +1,7 @@
 - user_id: 1
   user_name: user1
-  user_password: password1
+  # password1をハッシュ化した値
+  user_password: $2a$10$jlE/gvylGS.Y1KnTadSBoOVXfYP43emK8po5uQHLRfRpjc3T.a6k.
   email_address: yml@emai.com
   note: thisdata is from yml.file
   icon_image: null
