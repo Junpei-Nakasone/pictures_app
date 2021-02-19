@@ -1,6 +1,7 @@
 package api007
 
 import (
+	"database/sql"
 	"log"
 	"net/http"
 	"pictures_app/environment"
@@ -14,11 +15,11 @@ import (
 	"github.com/steinfletcher/apitest"
 )
 
-func prepareDB() {
-	db := db.CreateDBConnection()
+func prepareDB(db *sql.DB) {
+	// db := db.CreateDBConnection()
 
 	fixtures, err := testfixtures.New(
-		testfixtures.Database(db.DB()),
+		testfixtures.Database(db),
 		testfixtures.Dialect("mysql"),
 		testfixtures.Directory("testdata/fixtures"),
 	)
@@ -35,6 +36,8 @@ func TestApi007Test(t *testing.T) {
 	// prepareDB()
 	db := db.CreateDBConnection()
 	app := environment.NewApp(db)
+
+	prepareDB(db.DB())
 
 	util.MethodTest(t, "/login", app.App, "Post")
 
