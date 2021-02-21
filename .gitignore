@@ -1,8 +1,6 @@
-.aws/
 memo.txt
 TODO
 .env
 client/dist
 .DS_Store
-server/env/setenv.go
-server/environment/db/mysql.go
+server/environment/setenv.go

@@ -1,13 +1,12 @@
 package main
 
 import (
-	"pictures_app/env"
 	"pictures_app/environment"
 	"pictures_app/environment/db"
 )
 
 func main() {
-	env.SetEnvVariables()
+	environment.SetEnvVariables()
 	db := db.CreateDBConnection()
 	defer db.Close()
 
