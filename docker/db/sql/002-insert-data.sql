@@ -1,6 +1,6 @@
 INSERT INTO users VALUES
-(1, 'user1', 'password1', 'user1@email.com', 'I am user1', null),
-(2, 'user2', 'password2',"user2@emai.com", 'this is user2', null);
+(1, 'user1', 'password1', 'user1@email.com', 'I am user1', 'https://cdn.icon-icons.com/icons2/2859/PNG/512/avatar_face_man_boy_profile_smiley_happy_people_icon_181659.png'),
+(2, 'user2', 'password2',"user2@emai.com", 'this is user2', 'https://cdn.icon-icons.com/icons2/2859/PNG/512/avatar_face_man_boy_male_profile_smiley_happy_people_icon_181658.png');
 
 INSERT INTO pictures VALUES
 (1, 1, 'https://images.unsplash.com/photo-1514477917009-389c76a86b68?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8c2t5fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',"this is picture1", "3", "1", 2, null),
