@@ -10,6 +10,7 @@ import Sample from '@/components/Sample.vue'
 import SignUp from '@/views/SignUp.vue'
 import Buefy from '@/components/buefy.vue'
 import Detail from '@/components/detail.vue'
+import UserPage from '@/views/UserPage.vue'
 
 Vue.use(VueRouter)
 
@@ -64,6 +65,11 @@ const routes = [
     path: '/detail/:picture_id',
     name: 'detail',
     component: Detail
+  },
+  {
+    path: '/userpage/:user_id',
+    name: 'userpage',
+    component: UserPage
   }
 ]
 

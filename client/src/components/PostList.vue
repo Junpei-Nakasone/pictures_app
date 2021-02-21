@@ -1,6 +1,13 @@
 <template>
   <div>
-    <v-container>
+    <div class="columns is-gapless is-multiline is-mobile">
+      <div v-for="(post, key) in postType" :key="key">
+        <div class="column is-one-quarter">
+          <img :src="post.image_url" alt="">
+        </div>
+      </div>
+    </div>
+    <!-- <v-container>
       <v-row>
         <v-col
           class="pa-1 pa-sm-2"
@@ -17,7 +24,7 @@
 
         </v-col>
       </v-row>
-    </v-container>
+    </v-container> -->
   </div>
 </template>
 
