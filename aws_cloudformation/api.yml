@@ -1,0 +1,99 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: container on ecs cluster
+# DomainNameがエクスポートされていない場合はロールバックされる
+Resources:
+
+  Task:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: apis
+      Cpu: 256
+      Memory: 512
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      ExecutionRoleArn: !ImportValue ECSTaskExecutionRole
+      ContainerDefinitions:
+        - Name: picturescontainer
+          # pictures-appのECRからイメージを指定する
+          Image: 428351874559.dkr.ecr.ap-northeast-1.amazonaws.com/pictures-app:latest
+          Cpu: 256
+          Memory: 512
+          PortMappings:
+            # Goコンテナで開放しているポートと合わせる
+            - ContainerPort: 4567
+              Protocol: tcp
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: 'apis'
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: 'pictures-api'
+
+  Service:
+    Type: AWS::ECS::Service
+    DependsOn: ListenerRule
+    Properties:
+      ServiceName: pictures-service
+      TaskDefinition: !Ref Task
+      Cluster: !ImportValue 'ECSCluster'
+      LaunchType: FARGATE
+      DesiredCount: 1
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 70
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: ENABLED
+          Subnets:
+            - !ImportValue Subnet1
+            - !ImportValue Subnet2
+          SecurityGroups:
+            - !ImportValue ContainerSecurityGroup
+      LoadBalancers:
+        - ContainerName: picturescontainer
+        # Goアプリケーションで開放しているポートと合わせる
+          ContainerPort: 4567
+          TargetGroupArn: !Ref TargetGroup
+
+  TargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: pictures-tg
+      VpcId: !ImportValue VPC
+      Port: 80
+      Protocol: HTTP
+      Matcher:
+        HttpCode: 200-299
+      HealthCheckIntervalSeconds: 10
+      # /sampleはメッセージのみを返すAPI
+      # DBとの接続はないのでRDSを停止していてもヘルスチェックは通る想定
+      HealthCheckPath: /sample
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 10
+      TargetType: ip
+
+  ListenerRule:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Properties:
+      ListenerArn: !ImportValue Listener
+      Priority: 2
+      Conditions:
+        - Field: path-pattern
+          Values:
+            - /*
+
+      Actions:
+        - TargetGroupArn: !Ref TargetGroup
+          Type: forward
+
+
+Outputs:
+
+  ApiEndpoint:
+    Description: pictures API Endpoint
+    Value: !Join ['', ['http://', !ImportValue DomainName, '/sample']]
+    Export:
+      Name: 'picturesApiEndpoint'
+
