@@ -21,7 +21,18 @@ func (t *serviceRepository) FetchImagesByPictureID(param domain.RequestParam) (d
 
 	result := domain.Picture{}
 
-	err := t.db.Where(`picture_id = ?`, param.PictureID).
+	err := t.db.Table(`pictures`).
+		Select(`pictures.picture_id
+				,		pictures.user_id
+				,		pictures.image_url
+				,		pictures.published_at
+				,		users.user_name
+				,		users.icon_image
+				,		pictures.image_note
+			`).
+		Joins(`INNER JOIN users ON
+		 pictures.user_id = users.user_id`).
+		Where(`picture_id = ?`, param.PictureID).
 		Find(&result).Error
 
 	return result, err

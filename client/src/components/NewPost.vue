@@ -5,18 +5,22 @@
       <form @submit.prevent="submitPost()">
       <v-row>
         <v-col sm="5" md="6">
-          <div class="FieldField__wrapper">
-    <img v-bind:src="imagePreview" class="preview-image" v-on:click="openUpload">
-    <div class="form-group">
-      <input
-        name="image"
-        type="file"
-        id="file-field"
-        v-on:change="updatePreview"
-        style="display:none;"
-        >
-    </div>
-  </div>
+          <b-field class="file">
+            <b-upload v-model="file">
+              <a class="button is-primary">
+                <b-icon icon="camera"></b-icon>
+                <span v-if="file == null">
+                  写真を選択してください
+                </span>
+              </a>
+            </b-upload>
+            <span class="file-name" v-if="file">
+              {{ file.name }}
+            </span>
+          </b-field>
+          <figure>
+            <img :src="image" />
+          </figure>
         </v-col>
         <v-col sm="5" md="6" >
           <v-select
@@ -49,6 +53,9 @@
           投稿
           </span>
       </v-btn>
+      <div v-if="showProgress">
+        <b-progress></b-progress>
+      </div>
       </form>
     </v-container>
   </div>
@@ -69,16 +76,19 @@ import {
 export default {
   data() {
     return {
-      images: null,
-      imagePreview: 'https://cdn.icon-icons.com/icons2/930/PNG/512/camera_icon-icons.com_72364.png',
       prefectureCategories: [],
       viewCategories: [],
-      postData: {}
+      postData: {},
+      file: null,
+      showProgress: false
     }
   },
   computed: {
-    username : function () {
+    username() {
       this.postData.id = this.$store.getters["auth/id"]
+    },
+    image() {
+      return this.file ? window.URL.createObjectURL(this.file): ""
     }
   },
   async mounted() {
@@ -111,13 +121,13 @@ export default {
         reader.readAsDataURL(files[0])
       },
     submitPost() {
+      this.showProgress = true;
       const formData = new FormData();
-      console.log(formData)
+      formData.append("image", this.file);
       formData.append("image", this.images[0]);
       formData.append("view_category_cd", this.postData.viewCategoryCd)
       formData.append("prefecture_category_cd", this.postData.prefectureCategoryCd)
       formData.append("user_id", 1)
-      console.log(formData)
 
       api.post('/addImage', formData,{
         headers: {
