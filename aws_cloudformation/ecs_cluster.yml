@@ -72,19 +72,19 @@ Outputs:
       Name: 'ECSCluster'
 
   Listener:
-    Description: listener port 80番ポートのリスナー
+    Description: listener port on 80
     Value: !Ref LoadBalancerListener
     Export:
       Name: 'Listener'
 
   ContainerSecurityGroup:
-    Description: ECSコンテナ用のセキュリテイグループ
+    Description: security group for ecs container
     Value: !Ref ContainerSecurityGroup
     Export:
       Name: 'ContainerSecurityGroup'
 
   LoadBalancerDNS:
-    Description: ALBのドメイン名
+    Description: domain name for ALB
     Value: !GetAtt LoadBalancer.DNSName
     Export:
       Name: 'DomainName'

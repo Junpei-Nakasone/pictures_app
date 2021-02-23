@@ -61,14 +61,15 @@ Resources:
     Properties:
       Name: pictures-tg
       VpcId: !ImportValue VPC
-      Port: 80
-      Protocol: HTTP
+      # SSL化しているためポート443、プロトコルはHTTPSに設定
+      Port: 443
+      Protocol: HTTPS
       Matcher:
         HttpCode: 200-299
       HealthCheckIntervalSeconds: 10
-      # /sampleはメッセージのみを返すAPI
+      # /pingはメッセージのみを返すAPI
       # DBとの接続はないのでRDSを停止していてもヘルスチェックは通る想定
-      HealthCheckPath: /sample
+      HealthCheckPath: /ping
       HealthCheckProtocol: HTTP
       HealthCheckTimeoutSeconds: 5
       HealthyThresholdCount: 10
