@@ -36,7 +36,7 @@ Resources:
 Outputs:
 
   ECSTaskExecutionRole:
-    Description: ECSタスクの実行ロール
+    Description: task execution role for ecs
     Value: !GetAtt 'ECSTaskExecutionRole.Arn'
     Export:
       Name: 'ECSTaskExecutionRole'
