@@ -1,30 +1,12 @@
 <template>
   <div>
-    <div class="columns is-gapless is-multiline is-mobile">
-      <div v-for="(post, key) in postType" :key="key">
-        <div class="column is-one-quarter">
-          <img :src="post.image_url" alt="">
-        </div>
+    <div class="columns is-gapless is-multiline">
+      <div class="column is-4" v-for="post in postType" :key="post.picture_id">
+        <router-link :to="{name: 'detail', params: {id: post.picture_id}}">
+          <img :src="post.image_url">
+        </router-link>
       </div>
     </div>
-    <!-- <v-container>
-      <v-row>
-        <v-col
-          class="pa-1 pa-sm-2"
-          v-for="(post,key) in postType"
-          :key="key"
-          cols="6"
-          lg="4"
-          md="4"
-          sm="6"
-          xs="3"
-        >
-        {{post.post_id}}
-        <v-img :src="post.image_url" max-height="230"></v-img>
-
-        </v-col>
-      </v-row>
-    </v-container> -->
   </div>
 </template>
 

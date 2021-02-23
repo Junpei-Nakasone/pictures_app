@@ -8,7 +8,7 @@
 
   <template #start>
     <b-navbar-item>
-      <router-link to="/view-category">
+      <router-link to="/view_category">
         景色別
       </router-link>
     </b-navbar-item>

@@ -1,11 +1,27 @@
 <template>
   <section>
+    <div class="columns is-mobile">
+      <div class="column">
+        <figure class="image is-48x48">
+          <router-link :to="{name: 'userpage', params: {user_id: pictureData.user_id}}">
+            <b-tooltip :label="pictureData.user_name">
+              <img class="is-rounded" :src="pictureData.icon_image">
+            </b-tooltip>
+          </router-link>
+        </figure>
+        <p>{{ pictureData.image_note }}</p>
+      </div>
+    </div>
     <b-image :src="pictureData.image_url" ratio="16by9" />
-    <b-button
-      tag="router-link"
-      to="/"
-      type="is-info"
-    >戻る</b-button>
+    <div class="columns box">
+      <div class="column">
+        <b-button
+          tag="router-link"
+          to="/"
+          type="is-info"
+        >戻る</b-button>
+      </div>
+    </div>
   </section>
 </template>
 

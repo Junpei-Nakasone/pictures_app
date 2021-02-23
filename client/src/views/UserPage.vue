@@ -1,6 +1,7 @@
 <template>
   <div>
     userpage
+    {{ userData.user_name }}
   </div>
 </template>
 

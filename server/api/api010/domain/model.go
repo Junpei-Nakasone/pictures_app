@@ -10,5 +10,8 @@ type Picture struct {
 	PictureID   int    `json:"picture_id"`
 	UserID      int    `json:"user_id"`
 	ImageURL    string `json:"image_url"`
-	PublichedAt string `json:"published_at"`
+	PublishedAt string `json:"published_at"`
+	UserName    string `json:"user_name"`
+	IconImage   string `json:"icon_image"`
+	ImageNote   string `json:"image_note"`
 }
