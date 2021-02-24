@@ -53,6 +53,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import mixin from '@/mixin/mixin.js';
 
 export default {
   data() {
@@ -64,12 +65,16 @@ export default {
       show1: false,
     };
   },
+  mixins: [
+    mixin
+  ],
   computed: {
     ...mapGetters("auth", {
       username: "username",
       isLoggedIn: "isLoggedIn",
       id: "id",
-    })
+    }),
+
   },
   methods: {
     login() {
@@ -79,15 +84,11 @@ export default {
       })
       .then(() => {
         if (this.isLoggedIn) {
-          this.$store.dispatch("message/setSuccessMessage", {
-            message: "ログインしました"
-          })
+          this.showLoginSeccessMessage()
           this.$router.push("/")
         }
         if (!this.isLoggedIn) {
-          this.$store.dispatch("message/setErrorMessage", {
-          message: "ユーザー名かパスワード名が間違っています"
-        })
+          this.showLoginFailMessage()
         }
       })
       .catch((err) => {
@@ -101,15 +102,11 @@ export default {
       })
       .then(() => {
         if (this.isLoggedIn) {
-          this.$store.dispatch("message/setSuccessMessage", {
-            message: "ログインしました"
-          })
+          this.showLoginSeccessMessage()
           this.$router.push("/")
         }
         if (!this.isLoggedIn) {
-          this.$store.dispatch("message/setErrorMessage", {
-          message: "ユーザー名かパスワード名が間違っています"
-        })
+          this.showLoginFailMessage()
         }
       })
       .catch((err) => {
