@@ -39,6 +39,14 @@
             v-model="items"
             @change="updatePrefectureData(items)"
           ></v-select>
+          <v-textarea
+              v-model="image_note"
+              :error-messages="errors"
+              required
+              placeholder="写真の説明"
+              prepend-inner-icon="mdi-person"
+              @change="updateImageNote"
+          ></v-textarea>
         </v-col>
       </v-row>
       <v-btn
@@ -95,31 +103,13 @@ export default {
     api.get('/fetchPrefectureCategories')
       .then((res) => {
         this.prefectureCategories = res.data
-        console.log(this.prefectureCategories)
       });
       api.get('/fetchViewCategories')
       .then((res) => {
         this.viewCategories = res.data
-        console.log(this.viewCategories)
       });
   },
   methods: {
-    openUpload () {
-        document.getElementById('file-field').click()
-      },
-    updatePreview (e) {
-        this.images = e.target.files
-        console.log('e', e)
-        var reader, files = e.target.files
-        if (files.length === 0) {
-          console.log('Empty')
-        }
-        reader = new FileReader();
-        reader.onload = (e) => {
-          this.imagePreview = e.target.result
-        }
-        reader.readAsDataURL(files[0])
-      },
     submitPost() {
       this.showProgress = true;
       const formData = new FormData();
@@ -127,6 +117,7 @@ export default {
       formData.append("image", this.images[0]);
       formData.append("view_category_cd", this.postData.viewCategoryCd)
       formData.append("prefecture_category_cd", this.postData.prefectureCategoryCd)
+      formData.append("image_note", this.postData.imageNote)
       formData.append("user_id", 1)
 
       api.post('/addImage', formData,{
@@ -135,7 +126,6 @@ export default {
         }
       })
       .then((res) => {
-        console.log(res)
         this.$router.replace("/")
       })
       .catch((err) => {
@@ -147,6 +137,9 @@ export default {
     },
     updatePrefectureData(value) {
       this.postData.prefectureCategoryCd = value
+    },
+    updateImageNote(value) {
+      this.postData.imageNote = value
     }
 }
 }

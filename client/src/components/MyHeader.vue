@@ -37,9 +37,11 @@
       </div>
       <div v-if="isLoggedIn" class="buttons">
         <b-navbar-dropdown label="info">
-          <b-navbar-item href="#">
-            マイメニュー
+          <router-link :to="{name: 'userpage', params: {user_id: id}}">
+            <b-navbar-item>
+            {{username}}のユーザーページ
           </b-navbar-item>
+          </router-link>
           <b-navbar-item @click="logout">
             ログアウト
           </b-navbar-item>
@@ -55,125 +57,6 @@
   </template>
 
 </b-navbar>
-  <!-- <v-container>
-    <div v-if="isLoggedIn">
-    <v-toolbar flat class="mainHeader">
-      <router-link to="/" id="title">
-        <v-toolbar-title>View Pictures</v-toolbar-title>
-      </router-link>
-      <v-spacer></v-spacer>
-      {{username}}&nbsp;様
-      <v-toolbar-items class="hidden-xs-only">
-        <v-btn
-          large
-            class="ma-1"
-            elevation="2"
-            to="newPost"
-        >投稿する</v-btn>
-        <v-btn
-        @click="logout"
-        large
-        class="ma-1"
-        elevation="2"
-      >ログアウト
-      </v-btn>
-      </v-toolbar-items>
-      <div class="hidden-sm-and-up">
-        <v-menu offset-y>
-          <template v-slot:activator="{ on }">
-            <v-app-bar-nav-icon v-on="on"></v-app-bar-nav-icon>
-          </template>
-          <v-list class="responsiveMenu">
-            <v-list-item>
-              <v-list-item-title>
-                <v-btn
-                color="white"
-                  depressed
-                  class="ma-1"
-                  to="newPost"
-                >
-                  投稿する
-                </v-btn>
-                </v-list-item-title>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-title>
-                <v-btn
-                color="white"
-                depressed
-                @click="logout"
-                  class="ma-1"
-                  to="newPost"
-                >
-                  ログアウト
-                </v-btn>
-                </v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-      </div>
-    </v-toolbar>
-    </div>
-
-    <div v-if="!isLoggedIn">
-    <v-toolbar flat class="mainHeader">
-      <router-link to="/" id="title">
-        <v-toolbar-title>View Pictures</v-toolbar-title>
-      </router-link>
-      <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-xs-only">
-        <v-btn
-            to="/signup"
-            large
-            class="ma-1"
-            elevation="2"
-          >新規登録
-        </v-btn>
-
-        <v-btn
-            to="/login"
-            large
-            class="ma-1"
-            elevation="2"
-        >ログイン
-        </v-btn>
-
-      </v-toolbar-items>
-      <div class="hidden-sm-and-up">
-        <v-menu offset-y>
-          <template v-slot:activator="{ on }">
-            <v-app-bar-nav-icon v-on="on"></v-app-bar-nav-icon>
-          </template>
-          <v-list class="responsiveMenu">
-            <v-list-item>
-              <v-list-item-title>
-                <v-btn
-                  color="white"
-                depressed
-                  class="ma-1"
-                  to="signup"
-                >新規登録
-                </v-btn>
-                </v-list-item-title>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-title>
-                <v-btn
-                  color="white"
-                  depressed
-                  class="ma-1"
-                  to="login"
-                >
-                  ログイン
-                </v-btn>
-                </v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-      </div>
-    </v-toolbar>
-    </div>
-  </v-container> -->
 </template>
 
 <script>
@@ -184,6 +67,9 @@ export default {
     },
     username : function () {
       return this.$store.getters["auth/username"]
+    },
+    id : function () {
+      return this.$store.getters["auth/id"]
     }
   },
   methods: {

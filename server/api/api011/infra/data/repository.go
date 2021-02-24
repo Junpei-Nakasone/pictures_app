@@ -28,7 +28,7 @@ func (t *serviceRepository) FetchUserData(param domain.RequestParam) (domain.Use
 	return result, err
 }
 
-func (t *serviceRepository) FetchPicturesByUserID(userID string) ([]domain.Picture, error) {
+func (t *serviceRepository) FetchPicturesByUserID(userID int) ([]domain.Picture, error) {
 	result := []domain.Picture{}
 
 	err := t.db.Table(`pictures`).

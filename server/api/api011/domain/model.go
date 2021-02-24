@@ -2,7 +2,7 @@ package domain
 
 // RequestParam リスエストパラメータ
 type RequestParam struct {
-	UserID *string `validate:"required" json:"user_id"`
+	UserID *int `validate:"required" json:"user_id"`
 }
 
 // UserData ユーザー情報
