@@ -111,6 +111,7 @@
 import axios from 'axios'
 import api from '@/services/api'
 import { mapGetters } from "vuex"
+import mixin from '@/mixin/mixin.js';
 
 import {
   ValidationProvider,
@@ -122,6 +123,9 @@ export default {
     ValidationProvider,
     ValidationObserver,
   },
+  mixins: [
+    mixin
+  ],
   data() {
     return {
       message: "",
@@ -150,7 +154,6 @@ export default {
         "note": this.note,
       })
       .then((response) => {
-        console.log('結果', response.data)
         this.loginAfterSignup();
       })
       .catch((error) => {
@@ -164,16 +167,12 @@ export default {
       })
       .then(() => {
         if (this.isLoggedIn) {
-          this.$store.dispatch("message/setSuccessMessage", {
-            message: "新規登録成功"
-          })
+          this.showSignupSuccessMessage()
           this.$router.push("/")
         }
       })
       .catch((err) => {
-        this.$store.dispatch("message/setErrorMessage", {
-          message: "新規登録に失敗しました"
-        })
+        this.showSignupFailMessage()
       })
     }
   }

@@ -60,7 +60,12 @@
 </template>
 
 <script>
+import mixin from '@/mixin/mixin.js';
+
 export default {
+    mixins: [
+      mixin
+    ],
     computed: {
     isLoggedIn : function () {
       return this.$store.getters["auth/isLoggedIn"]
@@ -76,9 +81,7 @@ export default {
     logout: function() {
       sessionStorage.clear();
       this.$store.dispatch("auth/logout")
-      this.$store.dispatch('message/setSuccessMessage', {
-        message: 'ログアウトしました',
-      });
+      this.showLogoutMessage()
       this.$router.replace("/login")
     }
   }
