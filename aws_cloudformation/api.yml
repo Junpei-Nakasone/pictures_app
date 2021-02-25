@@ -62,8 +62,8 @@ Resources:
       Name: pictures-tg
       VpcId: !ImportValue VPC
       # SSL化しているためポート443、プロトコルはHTTPSに設定
-      Port: 443
-      Protocol: HTTPS
+      Port: 80
+      Protocol: HTTP
       Matcher:
         HttpCode: 200-299
       HealthCheckIntervalSeconds: 10
