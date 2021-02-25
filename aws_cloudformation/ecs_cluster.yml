@@ -23,8 +23,7 @@ Resources:
     Properties:
       LoadBalancerArn: !Ref LoadBalancer
       Protocol: HTTP
-      # 常時SSL化しているためポート443のみ開放する
-      Port: 443
+      Port: 80
       DefaultActions:
         - Type: forward
           TargetGroupArn: !Ref DefaultTargetGroup
@@ -59,7 +58,7 @@ Resources:
      VpcId: !ImportValue 'VPC'
      GroupDescription: for ecs containers
      SecurityGroupIngress:
-    #  インバウンドはALBからの通信のみ許可する
+    #  ECSコンテナはALBからの通信のみ許可する
        - SourceSecurityGroupId: !Ref 'LoadBalancerSecurityGroup'
          IpProtocol: -1
 
