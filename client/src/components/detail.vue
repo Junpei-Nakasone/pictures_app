@@ -12,8 +12,7 @@
         <p>{{ pictureData.image_note }}</p>
       </div>
     </div>
-    <b-image :src="pictureData.image_url" ratio="16by9" />
-    <div class="columns box">
+    <div class="columns">
       <div class="column">
         <b-button
           tag="router-link"
@@ -22,6 +21,7 @@
         >戻る</b-button>
       </div>
     </div>
+    <b-image :src="pictureData.image_url" />
   </section>
 </template>
 
