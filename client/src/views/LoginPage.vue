@@ -13,9 +13,9 @@
           <div class="pa-8">
             <form action="">
               <v-text-field
-                v-model="form.username"
+                v-model="form.emailAddress"
                 required
-                placeholder="username"
+                placeholder="email_address"
                 prepend-inner-icon="mdi-account"
               ></v-text-field>
               <v-text-field
@@ -79,7 +79,7 @@ export default {
   methods: {
     login() {
       this.$store.dispatch("auth/login", {
-        username: this.form.username,
+        emailAddress: this.form.emailAddress,
         password: this.form.password,
       })
       .then(() => {
@@ -97,7 +97,7 @@ export default {
     demoLogin()  {
 
       this.$store.dispatch("auth/login", {
-        username: "demo_user",
+        emailAddress: "user1@email.com",
         password: "demo_password",
       })
       .then(() => {

@@ -29,19 +29,6 @@
                   </ValidationProvider>
                   <ValidationProvider
                     mode="lazy"
-                    name="入力内容"
-                    rules="required|email"
-                  >
-                    <v-text-field
-                      v-model="email_address"
-                      :error-messages="errors"
-                      required
-                      placeholder="メールアドレス"
-                      prepend-inner-icon="mdi-email"
-                    ></v-text-field>
-                  </ValidationProvider>
-                  <ValidationProvider
-                    mode="lazy"
                     name="パスワード"
                     rules="required|min:8|password"
 
@@ -51,7 +38,6 @@
                       :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                       :type="show1 ? 'text' : 'password'"
                       counter
-                      :error-messages="errors"
                       required
                       placeholder="パスワード"
                       @click:append="show1 = !show1"
@@ -68,11 +54,23 @@
                       :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
                       :type="show2 ? 'text' : 'password'"
                       counter
-                      :error-messages="errors"
                       required
                       placeholder="パスワード(確認)"
                       @click:append="show2 = !show2"
                       prepend-inner-icon="mdi-lock"
+                    ></v-text-field>
+                  </ValidationProvider>
+                  <ValidationProvider
+                    mode="lazy"
+                    name="入力内容"
+                    rules="required|email"
+                  >
+                    <v-text-field
+                      v-model="emailAddress"
+                      required
+                      email
+                      placeholder="メールアドレス"
+                      prepend-inner-icon="mdi-email"
                     ></v-text-field>
                   </ValidationProvider>
                   <ValidationProvider
@@ -82,21 +80,39 @@
                   >
                     <v-textarea
                       v-model="note"
-                      :error-messages="errors"
                       required
                       placeholder="自己紹介"
                       prepend-inner-icon="mdi-person"
                     ></v-textarea>
                   </ValidationProvider>
+
+                  <b-field class="file">
+                  <b-upload v-model="file" required>
+                    <a class="button is-primary">
+                      <b-icon icon="camera"></b-icon>
+                      <span v-if="file == null">
+                        写真を選択してください
+                      </span>
+                    </a>
+                  </b-upload>
+                  <span class="file-name" v-if="file">
+                    {{ file.name }}
+                  </span>
+                </b-field>
+                <figure>
+                  <img :src="image" />
+                </figure>
                   <v-btn
                     block
                     elevation="2"
                     class="mr-4 mt-4"
                     type="submit"
-                    :disabled="invalid"
                   >
                     送信
                   </v-btn>
+                  <div v-if="showProgress">
+                  <b-progress></b-progress>
+                </div>
                 </form>
               </ValidationObserver>
             </div>
@@ -130,49 +146,66 @@ export default {
     return {
       message: "",
       username: "",
-      email_address: "",
+      emailAddress: "",
       password: "",
-      password_confirm: "",
+      passwordConfirm: "",
       note: "",
       isLoading: false,
       show1: false,
       show2: false,
+      file: null,
+      showProgress: false
     };
   },
   computed: {
     ...mapGetters("auth", {
       isLoggedIn: "isLoggedIn",
       id: "id",
-    })
+    }),
+    image() {
+      return this.file ? window.URL.createObjectURL(this.file): ""
+    }
   },
   methods: {
     submitUser() {
-      api.post('/addNewUser', {
-        "user_name": this.username,
-        "password": this.password,
-	      "email_address": this.email_address,
-        "note": this.note,
+      this.showProgress = true;
+      const formData = new FormData();
+      formData.append("user_name", this.username)
+      formData.append("password", this.password)
+      formData.append("note", this.note)
+      formData.append("email_address", this.emailAddress)
+      formData.append("icon_image", this.file)
+
+      api.post('/addNewUser', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       })
       .then((response) => {
         this.loginAfterSignup();
       })
       .catch((error) => {
-        console.log("エラー", error)
+        this.showProgress = false;
+        this.showSignupFailMessage()
+        this.$router.push("/signup")
       })
     },
     loginAfterSignup() {
       this.$store.dispatch("auth/login", {
-        username: this.username,
+        emailAddress: this.emailAddress,
         password: this.password
       })
       .then(() => {
         if (this.isLoggedIn) {
+          this.showProgress = false;
           this.showSignupSuccessMessage()
           this.$router.push("/")
         }
       })
       .catch((err) => {
+        this.showProgress = false;
         this.showSignupFailMessage()
+        this.$router.push("/signup")
       })
     }
   }
