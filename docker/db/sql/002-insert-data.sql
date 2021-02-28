@@ -1,6 +1,7 @@
 INSERT INTO users VALUES
-(1, 'user1', 'password1', 'user1@email.com', 'I am user1', 'https://cdn.icon-icons.com/icons2/2859/PNG/512/avatar_face_man_boy_profile_smiley_happy_people_icon_181659.png'),
-(2, 'user2', 'password2',"user2@emai.com", 'this is user2', 'https://cdn.icon-icons.com/icons2/2859/PNG/512/avatar_face_man_boy_male_profile_smiley_happy_people_icon_181658.png');
+(1, 'ユーザー1', '$2a$10$xNeIYwJagwfuqHdVWfJbteZmWDyh9tQ6gZ.4RJUylW8NNRFgTIN/2', 'user1@email.com', '旅行が好きです。', 'https://icons-for-pictures-app.s3-ap-northeast-1.amazonaws.com/avatar_face_boy_girl_female_male_woman_profile_smiley_happy_people_man_icon_181664.png'),
+(2, 'ユーザー2', '$2a$10$2yxJXD4WQeSsQB.caEkHQe.wUmPSyASQzf1YS9lRkg7DzOQvZfxAW',"user2@emai.com", 'カメラマンを目指して勉強中です、。', 'https://icons-for-pictures-app.s3-ap-northeast-1.amazonaws.com/avatar_face_girl_female_woman_profile_smiley_happy_people_icon_181662.png'),
+(3, 'ユーザー3', '$2a$10$brXec5mn/xVL9iF2.sr0C.j9isW1xm97cltX59FR1hNZLQLSlY8H.',"user2@emai.com", '写真同好会を作りたいです。', 'https://icons-for-pictures-app.s3-ap-northeast-1.amazonaws.com/avatar_face_man_boy_male_profile_smiley_happy_people_icon_181658+(1).png');
 
 INSERT INTO pictures VALUES
 (1, 1, 'https://images.unsplash.com/photo-1514477917009-389c76a86b68?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8c2t5fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',"this is picture1", "3", "1", 2, null),
