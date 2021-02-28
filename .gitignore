@@ -4,3 +4,4 @@ TODO
 client/dist
 .DS_Store
 server/environment/setenv.go
+server/general/hash/hash.go

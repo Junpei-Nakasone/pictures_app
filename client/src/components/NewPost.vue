@@ -6,7 +6,7 @@
       <v-row>
         <v-col sm="5" md="6">
           <b-field class="file">
-            <b-upload v-model="file">
+            <b-upload v-model="file" required>
               <a class="button is-primary">
                 <b-icon icon="camera"></b-icon>
                 <span v-if="file == null">
@@ -92,7 +92,7 @@ export default {
     }
   },
   computed: {
-    username() {
+    userID() {
       this.postData.id = this.$store.getters["auth/id"]
     },
     image() {
@@ -114,11 +114,10 @@ export default {
       this.showProgress = true;
       const formData = new FormData();
       formData.append("image", this.file);
-      formData.append("image", this.images[0]);
       formData.append("view_category_cd", this.postData.viewCategoryCd)
       formData.append("prefecture_category_cd", this.postData.prefectureCategoryCd)
       formData.append("image_note", this.postData.imageNote)
-      formData.append("user_id", 1)
+      formData.append("user_id", this.postData.id)
 
       api.post('/addImage', formData,{
         headers: {

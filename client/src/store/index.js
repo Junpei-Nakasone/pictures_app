@@ -37,25 +37,18 @@ const authModule = {
   actions: {
     login(context, payload) {
 
-      console.log("logindata ",payload)
-      // TODO: send tdo login API
-
       return api.post('/login', {
-        'user_name': payload.username,
+        'email_address': payload.emailAddress,
         'password': payload.password,
       })
       .then((res) => {
-        console.log("then in loginmethod",res.data)
         return context.commit('set',res.data)
-        // context.dispatch('reload')
-        // .then(user => user)
       })
       .catch(error => error.response)
     },
     reload(context) {
-      console.log('reloadデータ', context.user_name)
       const userdata = {
-        username: context.username,
+        emailAddress: context.emailAddress,
         password: context.password,
       }
       return context.commit('set', {

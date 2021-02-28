@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="columns is-vcentered">
-      <div class="column is-5">
-        <figure class="image is-4by3">
+      <div class="column is-3">
+        <figure class="image">
           <img :src="userData.icon_image">
         </figure>
       </div>
@@ -13,7 +13,12 @@
     </div>
 
     <div class="container has-text-centered">
-      <h1>{{ userData.user_name }}さんがこれまでに投稿した写真</h1>
+      <div v-if="userData.PostedPictures.length > 0">
+        <h1>{{ userData.user_name }}さんがこれまでに投稿した写真</h1>
+      </div>
+      <div v-else>
+        <h1>{{ userData.user_name }}さんが投稿した写真はまだありません</h1>
+      </div>
     </div>
     <div>
       <PostList
