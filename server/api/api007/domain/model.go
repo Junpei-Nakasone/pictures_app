@@ -2,8 +2,8 @@ package domain
 
 // RequestParam リクエストパラメータ
 type RequestParam struct {
-	UserName string `json:"user_name"`
-	Password string `json:"password"`
+	EmailAddress string `json:"email_address"`
+	Password     string `json:"password"`
 }
 
 // UserData ユーザーデータ取得用

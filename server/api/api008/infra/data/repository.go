@@ -23,8 +23,7 @@ func (t *serviceRepository) AddNewUser(param domain.RequestParam, hashedPassword
 		UserPassword: &hashedPassword,
 		EmailAddress: param.EmailAddress,
 		Note:         param.Note,
-		// IconImageは未実装
-		IconImage: nil,
+		IconImage:    param.IconImage,
 	}
 
 	err := t.db.Table("users").
@@ -35,10 +34,11 @@ func (t *serviceRepository) AddNewUser(param domain.RequestParam, hashedPassword
 	}
 
 	res := domain.ResponseParam{
-		UserID:    data.UserID,
-		UserName:  data.UserName,
-		Note:      data.Note,
-		IconImage: data.IconImage,
+		UserID:       data.UserID,
+		UserName:     data.UserName,
+		EmailAddress: data.EmailAddress,
+		Note:         data.Note,
+		IconImage:    data.IconImage,
 	}
 
 	return res, nil

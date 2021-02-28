@@ -27,7 +27,7 @@ func (t *serviceRepository) FetchUserData(param domain.RequestParam) (domain.Use
 		, user_password
 		, note
 		, icon_image`).
-		Where(`user_name = ?`, param.UserName).
+		Where(`email_address = ?`, param.EmailAddress).
 		Find(&result).Error
 
 	return result, err

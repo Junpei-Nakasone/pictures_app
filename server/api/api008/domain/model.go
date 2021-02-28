@@ -6,6 +6,7 @@ type RequestParam struct {
 	Password     *string `json:"password"`
 	EmailAddress *string `json:"email_address"`
 	Note         *string `json:"note"`
+	IconImage    *string `json:"icon_image"`
 }
 
 // User ユーザー情報格納用の構造体
@@ -20,8 +21,9 @@ type User struct {
 
 // ResponseParam レスポンスデータ
 type ResponseParam struct {
-	UserID    *int    `json:"user_id"`
-	UserName  *string `json:"user_name"`
-	Note      *string `json:"note"`
-	IconImage *string `json:"icon_image"`
+	UserID       *int    `json:"user_id"`
+	UserName     *string `json:"user_name"`
+	EmailAddress *string `json:"email_address"`
+	Note         *string `json:"note"`
+	IconImage    *string `json:"icon_image"`
 }

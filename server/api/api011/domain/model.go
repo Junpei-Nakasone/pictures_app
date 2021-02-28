@@ -9,7 +9,6 @@ type RequestParam struct {
 type UserData struct {
 	UserID         int    `json:"user_id"`
 	UserName       string `json:"user_name"`
-	EmailAddress   string `json:"email_address"`
 	Note           string `json:"note"`
 	IconImage      string `json:"icon_image"`
 	PostedPictures []Picture
