@@ -12,6 +12,7 @@ import (
 	api009 "pictures_app/api/api009/infra/web"
 	api010 "pictures_app/api/api010/infra/web"
 	api011 "pictures_app/api/api011/infra/web"
+	api012 "pictures_app/api/api012/infra/web"
 )
 
 type Handler struct {
@@ -26,6 +27,7 @@ type Handler struct {
 	api009 api009.Handler
 	api010 api010.Handler
 	api011 api011.Handler
+	api012 api012.Handler
 }
 
 func NewHandler(
@@ -40,6 +42,7 @@ func NewHandler(
 	api009 api009.Handler,
 	api010 api010.Handler,
 	api011 api011.Handler,
+	api012 api012.Handler,
 ) Handler {
 	return Handler{
 		api001: api001,
@@ -53,5 +56,6 @@ func NewHandler(
 		api009: api009,
 		api010: api010,
 		api011: api011,
+		api012: api012,
 	}
 }
