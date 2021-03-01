@@ -25,6 +25,7 @@ func NewRouter(e *echo.Echo, h Handler) {
 	e.POST("fetchImageByViewCategoryCd", h.api009.FetchImagesByViewCategoryCd)
 	e.POST("fetchImageByPictureID", h.api010.FetchImagesByPictureID)
 	e.POST("/fetchUserData", h.api011.FetchUserData)
+	e.DELETE("deletePicture", h.api012.DeletePicture)
 	e.Use(middleware.CORS())
 
 	// return e

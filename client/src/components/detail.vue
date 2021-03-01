@@ -13,12 +13,19 @@
       </div>
     </div>
     <div class="columns">
-      <div class="column">
+      <div class="column is-1">
         <b-button
           tag="router-link"
           to="/"
           type="is-info"
         >戻る</b-button>
+      </div>
+      <div v-if="pictureData.user_id === userData.id" class="column">
+        <b-button
+          tag="router-link"
+          to="/"
+          type="is-danger"
+        >削除</b-button>
       </div>
     </div>
     <b-image :src="pictureData.image_url" />
@@ -30,11 +37,17 @@ import api from '@/services/api'
 
 export default {
   data() {
-        return {
-          pictureData: {}
-        }
-    },
-    async mounted() {
+      return {
+        pictureData: {},
+        userData: {}
+      }
+  },
+  computed: {
+    userID() {
+      this.userData.id = this.$store.getters["auth/id"]
+    }
+  },
+  async mounted() {
       api.post('/fetchImageByPictureID', {
         picture_id: this.$route.params.id
       })
