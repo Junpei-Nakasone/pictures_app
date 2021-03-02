@@ -20,10 +20,9 @@
           type="is-info"
         >戻る</b-button>
       </div>
-      <div v-if="pictureData.user_id === userData.id" class="column">
+      <div v-if="pictureData.user_id === id" class="column">
         <b-button
-          tag="router-link"
-          to="/"
+          @click="deletePicture"
           type="is-danger"
         >削除</b-button>
       </div>
@@ -34,6 +33,7 @@
 
 <script>
 import api from '@/services/api'
+import mixin from '@/mixin/mixin.js'
 
 export default {
   data() {
@@ -42,9 +42,12 @@ export default {
         userData: {}
       }
   },
+  mixins: [
+    mixin
+  ],
   computed: {
-    userID() {
-      this.userData.id = this.$store.getters["auth/id"]
+    id: function() {
+      return this.$store.getters["auth/id"]
     }
   },
   async mounted() {
@@ -57,7 +60,23 @@ export default {
       .catch((err) => {
         console.log(err)
       })
+    },
+  methods: {
+    deletePicture() {
+      api.delete('/deletePicture', {
+        data: {
+          picture_id: this.pictureData.picture_id
+        }
+      })
+      .then((res) => {
+        this.showDeleteMessage()
+        this.$router.push('/')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
     }
+  }
 }
 </script>
 
