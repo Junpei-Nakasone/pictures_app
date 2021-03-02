@@ -34,6 +34,13 @@ export default {
         message: 'ログアウトしました',
         type: 'is-info'
       })
+    },
+    showDeleteMessage() {
+      this.$buefy.toast.open({
+        duration: 4000,
+        message: '写真を削除しました',
+        type: 'is-info'
+      })
     }
   }
 }
