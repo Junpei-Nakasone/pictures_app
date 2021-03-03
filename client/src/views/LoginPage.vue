@@ -15,15 +15,15 @@
               <v-text-field
                 v-model="form.emailAddress"
                 required
-                placeholder="email_address"
-                prepend-inner-icon="mdi-account"
+                placeholder="Eメールアドレス"
+                prepend-inner-icon="mdi-email"
               ></v-text-field>
               <v-text-field
               v-model="form.password"
                 :append-icon="show1 ? 'mdi-eye' : 'mdi-off'"
                 :type="show1 ? 'text': 'password'"
                 required
-                placeholder="password"
+                placeholder="パスワード"
                 @click:append="show1 = !show1"
                 prepend-inner-icon="mdi-lock"
               ></v-text-field>
