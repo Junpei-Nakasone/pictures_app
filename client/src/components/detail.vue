@@ -9,6 +9,7 @@
             </b-tooltip>
           </router-link>
         </figure>
+        <hr>
         <p>{{ pictureData.image_note }}</p>
       </div>
     </div>
