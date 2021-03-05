@@ -1,5 +1,5 @@
 # View_Pictures
-良い景色を写真を撮って共有できるアプリです。
+良い景色の写真を撮って共有できるアプリです。
 
 ## URL
 https://pictures-app.work/
