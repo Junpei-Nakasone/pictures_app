@@ -92,8 +92,8 @@ export default {
     }
   },
   computed: {
-    userID() {
-      this.postData.id = this.$store.getters["auth/id"]
+    id: function() {
+      return this.$store.getters["auth/id"]
     },
     image() {
       return this.file ? window.URL.createObjectURL(this.file): ""
@@ -117,7 +117,7 @@ export default {
       formData.append("view_category_cd", this.postData.viewCategoryCd)
       formData.append("prefecture_category_cd", this.postData.prefectureCategoryCd)
       formData.append("image_note", this.postData.imageNote)
-      formData.append("user_id", this.postData.id)
+      formData.append("user_id", this.id)
 
       api.post('/addImage', formData,{
         headers: {
