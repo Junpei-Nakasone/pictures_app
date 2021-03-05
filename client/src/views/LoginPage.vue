@@ -98,7 +98,7 @@ export default {
 
       this.$store.dispatch("auth/login", {
         emailAddress: "user1@email.com",
-        password: "demo_password",
+        password: "password1",
       })
       .then(() => {
         if (this.isLoggedIn) {
