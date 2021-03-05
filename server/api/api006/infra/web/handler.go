@@ -59,16 +59,17 @@ func (h *handler) AddImage(c echo.Context) error {
 	uploadedFileName := "https://20201108-bucket2.s3-ap-northeast-1.amazonaws.com/" + fileName
 
 	userID := c.FormValue("user_id")
+	intUserID, _ := strconv.Atoi(userID)
 	viewCategoryCd := c.FormValue("view_category_cd")
 	prefectureCategoryCd := c.FormValue("prefecture_category_cd")
-
-	intUserID, _ := strconv.Atoi(userID)
+	imageNote := c.FormValue("image_note")
 
 	data := domain.Picture{
 		UserID:               intUserID,
 		ImageURL:             uploadedFileName,
 		PrefectureCategoryCd: prefectureCategoryCd,
 		ViewCategoryCd:       viewCategoryCd,
+		ImageNote:            imageNote,
 		PublishedAt:          time.Now(),
 	}
 
