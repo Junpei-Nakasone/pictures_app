@@ -10,7 +10,7 @@ export default {
     showLoginFailMessage() {
       this.$buefy.toast.open({
         duration: 5000,
-        message: 'ユーザー名かパスワード名が間違っています',
+        message: 'ユーザー名かパスワードが間違っています',
         type: 'is-danger'
       })
     },
