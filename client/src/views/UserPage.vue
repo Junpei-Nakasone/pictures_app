@@ -3,7 +3,7 @@
     <div class="columns is-vcentered">
       <div class="column is-3">
         <figure class="image">
-          <img :src="userData.icon_image">
+          <img class="is-rounded" :src="userData.icon_image">
         </figure>
       </div>
       <div class="column is-6 is-offset-1">
