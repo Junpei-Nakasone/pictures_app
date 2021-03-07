@@ -1,7 +1,20 @@
 - user_id: 1
-  user_name: user1
-  # password1をハッシュ化した値
-  user_password: $2a$10$jlE/gvylGS.Y1KnTadSBoOVXfYP43emK8po5uQHLRfRpjc3T.a6k.
-  email_address: yml@emai.com
-  note: thisdata is from yml.file
-  icon_image: null
+  user_name: "ユーザー1"
+  user_password: "$2a$10$xNeIYwJagwfuqHdVWfJbteZmWDyh9tQ6gZ.4RJUylW8NNRFgTIN/2"
+  email_address: "user1@email.com"
+  note: "旅行が好きです。"
+  icon_image: "https://icons-for-pictures-app.s3-ap-northeast-1.amazonaws.com/avatar_face_boy_girl_female_male_woman_profile_smiley_happy_people_man_icon_181664.png"
+
+- user_id: 2
+  user_name: "ユーザー2"
+  user_password: "$2a$10$2yxJXD4WQeSsQB.caEkHQe.wUmPSyASQzf1YS9lRkg7DzOQvZfxAW"
+  email_address: "user2@emai.com"
+  note: "カメラマンを目指して勉強中です、。"
+  icon_image: "https://icons-for-pictures-app.s3-ap-northeast-1.amazonaws.com/avatar_face_girl_female_woman_profile_smiley_happy_people_icon_181662.png"
+
+- user_id: 3
+  user_name: "ユーザー3"
+  user_password: "$2a$10$brXec5mn/xVL9iF2.sr0C.j9isW1xm97cltX59FR1hNZLQLSlY8H."
+  email_address: "user2@emai.com"
+  note: "写真同好会を作りたいです。"
+  icon_image: "https://icons-for-pictures-app.s3-ap-northeast-1.amazonaws.com/avatar_face_man_boy_male_profile_smiley_happy_people_icon_181658+(1).png"

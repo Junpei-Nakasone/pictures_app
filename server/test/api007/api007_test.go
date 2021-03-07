@@ -16,7 +16,6 @@ import (
 )
 
 func prepareDB(db *sql.DB) {
-	// db := db.CreateDBConnection()
 
 	fixtures, err := testfixtures.New(
 		testfixtures.Database(db),
@@ -31,9 +30,10 @@ func prepareDB(db *sql.DB) {
 	}
 }
 
-func TestApi007Test(t *testing.T) {
+func TestApi007Test001(t *testing.T) {
 
-	// prepareDB()
+	environment.SetEnvVariables()
+
 	db := db.CreateDBConnection()
 	app := environment.NewApp(db)
 
@@ -45,8 +45,29 @@ func TestApi007Test(t *testing.T) {
 		Handler(app.App).
 		Post("/login").
 		Header("Content-Type", "application/json").
-		BodyFromFile("testdata/test001.golden").
+		BodyFromFile("testdata/request/test001.golden").
 		Expect(t).
 		Status(http.StatusOK).
+		End()
+}
+
+func TestApi007Test002(t *testing.T) {
+
+	environment.SetEnvVariables()
+
+	db := db.CreateDBConnection()
+	app := environment.NewApp(db)
+
+	prepareDB(db.DB())
+
+	util.MethodTest(t, "/login", app.App, "Post")
+
+	apitest.New().
+		Handler(app.App).
+		Post("/login").
+		Header("Content-Type", "application/json").
+		BodyFromFile("testdata/request/test002.golden").
+		Expect(t).
+		Status(http.StatusNotFound).
 		End()
 }
