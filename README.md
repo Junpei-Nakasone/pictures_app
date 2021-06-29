@@ -1,9 +1,6 @@
 # View_Pictures
 良い景色の写真を撮って共有できるアプリです。
 
-## URL
-https://pictures-app.work/
-
 ## 使用技術
 ### フロントエンド
 - Vue.js: 2.6.12
